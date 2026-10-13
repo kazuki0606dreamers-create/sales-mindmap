@@ -1,0 +1,2113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>資産形成スクール 完全版スクリプト｜世間話・問題提起・危機感・プレゼン</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    background:
+      radial-gradient(ellipse at top, rgba(212,175,55,0.08) 0%, transparent 55%),
+      radial-gradient(ellipse at bottom, rgba(0,0,0,0.4) 0%, transparent 60%),
+      linear-gradient(160deg, #0d2419 0%, #061a11 50%, #0a1e15 100%);
+    color: #2c3e50;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .page-header {
+    text-align: center;
+    padding: 40px 20px 16px;
+    color: white;
+    position: relative;
+  }
+  .page-header h1 {
+    font-size: 2em;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #f5e6a8 0%, #d4af37 45%, #f5d76e 70%, #b8941f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+  }
+  .page-header p {
+    color: #c8b87a;
+    font-size: 0.92em;
+    letter-spacing: 0.18em;
+    font-weight: 300;
+  }
+  .page-header p::before, .page-header p::after { content: '✦'; color: #d4af37; margin: 0 14px; font-size: 0.8em; opacity: 0.7; }
+  .hint { display: inline-block; margin-top: 16px; padding: 8px 18px; background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(212,175,55,0.05)); border-radius: 22px; font-size: 0.78em; color: #e6d894; border: 1px solid rgba(212,175,55,0.3); letter-spacing: 0.08em; }
+
+  /* Flow banner */
+  .flow-banner {
+    max-width: 1000px;
+    margin: 20px auto 10px;
+    padding: 20px 28px;
+    background: linear-gradient(135deg, rgba(10,30,21,0.92) 0%, rgba(6,26,17,0.96) 100%);
+    border: 1px solid rgba(212,175,55,0.4);
+    border-radius: 14px;
+    backdrop-filter: blur(6px);
+  }
+  .flow-banner h3 {
+    text-align: center;
+    font-size: 0.95em;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #f5e6a8, #d4af37);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+  }
+  .flow-steps {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 8px;
+    align-items: center;
+  }
+  .flow-step {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .flow-step .fs-head { display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(212,175,55,0.25); padding-bottom: 8px; margin-bottom: 8px; }
+  .flow-step .fs-num { font-size: 1.1em; font-weight: 800; background: linear-gradient(135deg, #f5e6a8, #d4af37); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .flow-step .fs-title { font-size: 0.88em; font-weight: 700; color: #fff; font-family: "Hiragino Mincho ProN", "Yu Mincho", serif; }
+  .flow-step .fs-goal { display: block; font-size: 0.74em; color: #f0eada; line-height: 1.65; letter-spacing: 0.02em; font-weight: 500; }
+  .flow-arrow { display: none; color: #f5d76e; font-size: 1.2em; text-align: center; }
+  @media (min-width: 720px) { .flow-arrow { display: block; } }
+
+  /* Flow mindmap steps */
+  .flow-mindmap { max-width: 1180px; margin: 20px auto 30px; padding: 0 28px; }
+  .fm-steps {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 4px;
+    align-items: stretch;
+  }
+  .fm-step {
+    background: linear-gradient(165deg, #fffef9 0%, #f7f0d8 100%);
+    border: 1.5px solid rgba(212,175,55,0.55);
+    border-top: 7px solid;
+    border-radius: 10px;
+    padding: 34px 22px 26px;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    transition: transform 0.35s cubic-bezier(.2,.7,.2,1), box-shadow 0.35s ease;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.45), 0 0 0 1px rgba(212,175,55,0.15), inset 0 1px 0 rgba(255,255,255,0.85);
+    position: relative;
+    overflow: hidden;
+    min-height: 220px;
+  }
+  .fm-step::before { content: ''; position: absolute; top: 7px; left: 7px; right: 7px; bottom: 7px; border: 1px solid rgba(212,175,55,0.4); border-radius: 6px; pointer-events: none; z-index: 1; }
+  .fm-step::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at top right, rgba(212,175,55,0.12) 0%, transparent 55%); pointer-events: none; }
+  .fm-step:hover { transform: translateY(-8px); box-shadow: 0 24px 52px rgba(0,0,0,0.55), 0 0 0 1px rgba(212,175,55,0.3); }
+  .fm-step-head { display: flex; flex-direction: column; gap: 6px; }
+  .fm-num { font-size: 2.2em; font-weight: 900; line-height: 1; }
+  .fm-title { font-size: 1.5em; font-weight: 800; letter-spacing: 0.04em; line-height: 1.2; font-family: "Hiragino Mincho ProN", "Yu Mincho", serif; }
+  .fm-arrow { display: none; color: rgba(212,175,55,0.85); font-size: 1.4em; text-align: center; align-self: center; }
+  @media (min-width: 720px) { .fm-arrow { display: block; } }
+  .fm-tap { display: inline-block; margin-top: auto; font-size: 0.72em; font-weight: 600; letter-spacing: 0.06em; background: rgba(0,0,0,0.08); border-radius: 8px; padding: 4px 12px; color: rgba(0,0,0,0.5); }
+
+  .n1 { border-top-color: #2d6a4f; } .n1 .n1 .fm-num, .n1 .fm-title { color: #2d6a4f; }
+  .n2 { border-top-color: #1f3a5f; } .n2 .n2 .fm-num, .n2 .fm-title { color: #1f3a5f; }
+  .n3 { border-top-color: #b5651d; } .n3 .n3 .fm-num, .n3 .fm-title { color: #b5651d; }
+  .n4 { border-top-color: #6b3fa0; } .n4 .n4 .fm-num, .n4 .fm-title { color: #6b3fa0; }
+  .n5 { border-top-color: #b52d2d; } .n5 .n5 .fm-num, .n5 .fm-title { color: #b52d2d; }
+
+  /* Modal */
+  .modal-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 100; display: none; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 20px; backdrop-filter: blur(4px); }
+  .modal-backdrop.active { display: flex; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .modal { background: white; width: 100%; max-width: 760px; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.4); animation: slideUp 0.3s ease; margin: auto; }
+  .modal-header { padding: 24px 26px; color: white; position: relative; }
+  .modal-header .head-badge { display: inline-block; background: rgba(255,255,255,0.25); width: 36px; height: 36px; border-radius: 50%; text-align: center; line-height: 36px; font-weight: bold; margin-right: 10px; vertical-align: middle; font-size: 1.1em; }
+  .modal-header h2 { display: inline-block; font-size: 1.4em; vertical-align: middle; }
+  .modal-header .why { margin-top: 12px; font-size: 0.88em; line-height: 1.65; opacity: 0.95; }
+  .modal-close { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; background: rgba(255,255,255,0.2); border: none; border-radius: 50%; color: white; font-size: 1.3em; cursor: pointer; line-height: 1; }
+  .modal-body { padding: 24px 26px 30px; }
+  .section { margin-bottom: 24px; }
+  .section-title { font-size: 1.02em; font-weight: bold; padding: 6px 0 10px; border-bottom: 2px solid; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+
+  .m1 .modal-header { background: linear-gradient(135deg, #1f5d3c, #2d6a4f); }
+  .m1 .section-title { color: #2d6a4f; border-color: #2d6a4f; }
+  .m2 .modal-header { background: linear-gradient(135deg, #1a2f54, #1f3a5f); }
+  .m2 .section-title { color: #1f3a5f; border-color: #1f3a5f; }
+  .m3 .modal-header { background: linear-gradient(135deg, #9c5615, #b5651d); }
+  .m3 .section-title { color: #b5651d; border-color: #b5651d; }
+  .m4 .modal-header { background: linear-gradient(135deg, #553285, #6b3fa0); }
+  .m4 .section-title { color: #6b3fa0; border-color: #6b3fa0; }
+  .m5 .modal-header { background: linear-gradient(135deg, #8b1a1a, #b52d2d); }
+  .m5 .section-title { color: #b52d2d; border-color: #b52d2d; }
+
+  .purpose-box { background: linear-gradient(135deg, #fffbea, #fef3c7); border: 1.5px solid #fbbf24; border-radius: 12px; padding: 16px 18px; margin-bottom: 8px; color: #78350f; font-size: 0.88em; line-height: 1.85; white-space: pre-wrap; }
+  .purpose-box .hl-red { color: #dc2626; font-weight: bold; }
+
+  .musttalk-list { counter-reset: mt-counter; }
+  .musttalk-card { background: #fff; border: 2px solid; border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; position: relative; padding-left: 50px; font-size: 0.88em; line-height: 1.7; color: #2d3748; }
+  .m1 .musttalk-card { border-color: #2d6a4f; }
+  .m2 .musttalk-card { border-color: #1f3a5f; }
+  .m3 .musttalk-card { border-color: #b5651d; }
+  .m4 .musttalk-card { border-color: #6b3fa0; }
+  .m5 .musttalk-card { border-color: #b52d2d; }
+  .musttalk-card::before { content: counter(mt-counter); counter-increment: mt-counter; position: absolute; left: 12px; top: 12px; width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.95em; }
+  .m1 .musttalk-card::before { background: #2d6a4f; }
+  .m2 .musttalk-card::before { background: #1f3a5f; }
+  .m3 .musttalk-card::before { background: #b5651d; }
+  .m4 .musttalk-card::before { background: #6b3fa0; }
+  .m5 .musttalk-card::before { background: #b52d2d; }
+  .musttalk-card .mt-quote { display: block; padding-left: 10px; border-left: 3px solid; font-weight: bold; }
+  .m1 .mt-quote { border-color: #2d6a4f; }
+  .m2 .mt-quote { border-color: #1f3a5f; }
+  .m3 .mt-quote { border-color: #b5651d; }
+  .m4 .mt-quote { border-color: #6b3fa0; }
+  .m5 .mt-quote { border-color: #b52d2d; }
+  .musttalk-card .mt-intent { display: block; margin-top: 14px; padding: 16px 18px 16px 20px; background: linear-gradient(135deg, #fff9e6 0%, #fef3c7 100%); border: 1.5px solid #d4af37; border-left: 5px solid #b8941f; border-radius: 8px; font-size: 1em; line-height: 1.85; color: #1a1410; font-weight: 500; }
+  .musttalk-card .mt-intent .mt-intent-label { display: inline-block; color: #b8941f; font-weight: 900; margin-right: 10px; font-size: 1.05em; letter-spacing: 0.06em; }
+
+  .tip-box { background: #ecfdf5; border: 1px dashed #10b981; border-radius: 8px; padding: 12px 14px; margin-top: 4px; font-size: 0.83em; line-height: 1.7; color: #065f46; }
+  .tip-box .tip-label { font-weight: bold; color: #047857; margin-right: 6px; }
+
+  .ngok-row { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 14px; background: #f8fafc; padding: 12px; border-radius: 8px; }
+  .ngok-row .situation { font-weight: bold; font-size: 0.85em; color: #2d3748; margin-bottom: 4px; }
+  .ngok-card { padding: 10px 12px; border-radius: 6px; font-size: 0.82em; line-height: 1.6; }
+  .ngok-card .tag-bad { color: #c0392b; font-weight: bold; margin-right: 5px; }
+  .ngok-card .tag-good { color: #1e8449; font-weight: bold; margin-right: 5px; }
+  .ngok-card.bad { background: #fef0f0; border: 1px solid #f5d7d3; }
+  .ngok-card.good { background: #eef9f1; border: 1px solid #cfead6; }
+  @media (min-width: 640px) { .ngok-row { grid-template-columns: 1fr 1fr; } .ngok-row .situation { grid-column: 1 / -1; } }
+
+  .objection-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; border-left: 4px solid #dd6b20; }
+  .obj-q { font-size: 0.88em; font-weight: bold; color: #c0392b; margin-bottom: 6px; }
+  .obj-q::before { content: "Q. "; }
+  .obj-a { font-size: 0.84em; color: #2d3748; line-height: 1.7; padding-left: 14px; border-left: 2px solid #68d391; margin-top: 6px; }
+  .obj-a::before { content: "A. "; font-weight: bold; color: #1e8449; }
+
+  /* Slide cards */
+  .slide-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+  .slide-header { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; background: linear-gradient(135deg, #1f3a5f, #2c5282); color: white; }
+  .slide-page { background: white; color: #1f3a5f; font-weight: bold; padding: 4px 10px; border-radius: 6px; font-size: 0.85em; flex-shrink: 0; }
+  .slide-title-text { flex: 1; font-size: 0.92em; font-weight: bold; }
+  .slide-toggle { font-size: 0.85em; transition: transform 0.25s; }
+  .slide-card.open .slide-toggle { transform: rotate(180deg); }
+  .slide-body { padding: 16px; display: none; background: #f8fafc; }
+  .slide-card.open .slide-body { display: block; animation: fadeIn 0.25s ease; }
+  .slide-talk { font-size: 0.85em; line-height: 1.8; color: #2d3748; padding: 14px 16px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 12px; }
+
+  /* Slide visual wrappers */
+  .slide-image { background: #e9eef4; aspect-ratio: 16/10; width: 88%; max-width: 720px; margin: 0 auto 16px; border-radius: 6px; overflow: hidden; position: relative; display: flex; flex-direction: column; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+  @media (max-width: 720px) { .slide-image { width: 96%; } }
+  .slide-image:has(.sv-wrap) { aspect-ratio: auto; overflow: visible; }
+
+  /* Slide visual style */
+  .sv-wrap { width: 100%; background: #ffffff; display: flex; flex-direction: column; font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif; border-radius: 6px; overflow: hidden; }
+  .sv-header { background: #1a2f54; color: #fff; padding: 1.5% 2.5%; display: flex; align-items: center; gap: 10px; }
+  .sv-badge { background: #c0392b; color: #fff; font-weight: 900; font-size: clamp(0.45em,1.1vw,0.65em); padding: 0.4% 1.2%; border-radius: 3px; letter-spacing: 0.04em; white-space: nowrap; }
+  .sv-header-title { font-weight: 700; font-size: clamp(0.5em,1.2vw,0.72em); flex: 1; }
+  .sv-logo { border: 1.5px solid #fff; border-radius: 14px; padding: 0.3% 1.2%; font-weight: 800; font-size: clamp(0.48em,1.1vw,0.68em); letter-spacing: 0.04em; white-space: nowrap; }
+  .sv-body { padding: 3% 4% 3%; display: flex; flex-direction: column; gap: 2%; }
+  .sv-eyebrow { color: #b5651d; font-weight: 800; font-size: clamp(0.5em,1.3vw,0.72em); letter-spacing: 0.1em; }
+  .sv-main { color: #111; font-weight: 900; font-size: clamp(0.9em,2.8vw,1.55em); line-height: 1.3; margin-bottom: 1%; }
+  .sv-red { color: #c0392b; }
+  .sv-blue { color: #1a3a7a; }
+  .sv-yellow { color: #d4af37; }
+  .sv-subtitle { color: #555; font-size: clamp(0.5em,1.3vw,0.75em); font-weight: 600; margin-bottom: 1%; line-height: 1.5; }
+  .sv-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2%; }
+  .sv-card { background: #fce8e6; border-radius: 10px; padding: 3% 3.5%; display: flex; flex-direction: column; gap: 4%; }
+  .sv-card-badge { display: inline-block; background: #c0392b; color: #fff; font-weight: 900; font-size: clamp(0.5em,1.4vw,0.78em); padding: 1.5% 4%; border-radius: 4px; align-self: flex-start; }
+  .sv-card-title { color: #111; font-weight: 900; font-size: clamp(0.7em,2vw,1.05em); line-height: 1.3; }
+  .sv-card-desc { color: #333; font-size: clamp(0.55em,1.45vw,0.78em); line-height: 1.55; flex: 1; }
+  .sv-callout { background: #1a2f54; color: #fff; padding: 2.5% 4%; border-radius: 10px; text-align: center; margin-top: 1%; }
+  .sv-callout-eyebrow { color: #8aa8cc; font-size: clamp(0.55em,1.4vw,0.76em); font-weight: 600; margin-bottom: 1%; }
+  .sv-callout-big { font-weight: 900; font-size: clamp(0.85em,2.5vw,1.38em); line-height: 1.45; }
+  .sv-stat-box { background: #fde8e8; border-radius: 14px; padding: 4% 5%; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 3%; }
+  .sv-stat-eyebrow { color: #c0392b; font-weight: 800; font-size: clamp(0.65em,1.7vw,0.9em); }
+  .sv-stat-num { color: #c0392b; font-weight: 900; font-size: clamp(2.4em,8vw,4.8em); line-height: 1; letter-spacing: -0.02em; }
+  .sv-stat-unit { font-size: 0.45em; vertical-align: top; margin-left: 2px; }
+  .sv-stat-label { color: #333; font-weight: 700; font-size: clamp(0.6em,1.6vw,0.88em); line-height: 1.4; }
+  .sv-stat-source { color: #888; font-size: clamp(0.5em,1.3vw,0.7em); margin-top: 2%; }
+  .sv-split { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3%; margin-top: 1%; }
+  .sv-reasons { display: flex; flex-direction: column; gap: 3.5%; }
+  .sv-reason { background: #f3f5f8; border-left: 5px solid #c0392b; border-radius: 8px; padding: 2.5% 3%; }
+  .sv-reason-title { color: #111; font-weight: 900; font-size: clamp(0.7em,1.8vw,1em); margin-bottom: 1.5%; }
+  .sv-reason-text { color: #333; font-size: clamp(0.58em,1.5vw,0.8em); line-height: 1.55; }
+  .sv-chips { display: flex; flex-wrap: wrap; gap: 2%; margin: 2% 0; }
+  .sv-chip { background: #f3f5f8; border: 1.5px solid #cbd5e0; border-radius: 20px; padding: 1.2% 3%; font-size: clamp(0.55em,1.4vw,0.76em); font-weight: 600; color: #2d3748; }
+  .sv-warn-box { background: #1a2f54; border-radius: 10px; padding: 3% 4%; text-align: center; }
+  .sv-warn-label { color: #8aa8cc; font-size: clamp(0.58em,1.5vw,0.8em); font-weight: 600; margin-bottom: 1%; }
+  .sv-warn-big { color: #fff; font-weight: 900; font-size: clamp(0.85em,2.6vw,1.45em); line-height: 1.45; }
+  .sv-flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: start; gap: 0; padding: 0 1%; margin: 1.5% 0; }
+  .sv-step { display: grid; grid-template-rows: auto auto 1fr auto; justify-items: center; text-align: center; gap: 6px; }
+  .sv-step-circle { background: #1a2f54; color: #fff; width: clamp(50px,12%,90px); aspect-ratio: 1/1; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: clamp(0.55em,1.55vw,0.85em); line-height: 1.2; padding: 4px; text-align: center; }
+  .sv-step-label { color: #1a2f54; font-weight: 900; font-size: clamp(0.55em,1.5vw,0.8em); letter-spacing: 0.05em; }
+  .sv-step-desc { color: #333; font-size: clamp(0.45em,1.2vw,0.66em); line-height: 1.4; padding: 0 4px; }
+  .sv-step-tag { background: #fce8e6; color: #c0392b; font-weight: 900; font-size: clamp(0.45em,1.2vw,0.66em); padding: 5px 6px; border-radius: 4px; width: 100%; text-align: center; }
+  .sv-flow-arrow { color: #1a3a7a; font-weight: 900; font-size: clamp(0.8em,2.4vw,1.3em); align-self: start; margin-top: clamp(18px,5%,36px); padding: 0 4px; }
+  .sv-table { display: grid; grid-template-columns: 0.9fr 1fr 1fr 1.05fr; border-radius: 10px; overflow: hidden; margin-top: 1.5%; border: 1px solid #e6ecf3; }
+  .sv-cell { padding: 2.2% 1.5%; text-align: center; font-size: clamp(0.55em,1.45vw,0.78em); line-height: 1.45; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; }
+  .sv-cell-label { background: #f3f5f8; color: #333; font-weight: 700; text-align: center; }
+  .sv-h { font-weight: 900; font-size: clamp(0.7em,1.85vw,1em); padding: 2.5% 1%; }
+  .sv-h-blank { background: #f3f5f8; }
+  .sv-h-red { background: #fce8e6; color: #c0392b; }
+  .sv-h-gold { background: #1a2f54; color: #fff; }
+  .sv-other { background: #fef5f4; color: #c0392b; font-weight: 700; }
+  .sv-ours { background: #eaf0fa; color: #1a2f54; font-weight: 800; }
+
+  /* Script section */
+  .script-note { font-size: 0.82em; color: #6b7280; line-height: 1.7; padding: 10px 14px; background: #f8fafc; border-radius: 8px; margin-bottom: 14px; }
+  .script-line { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
+  .script-tag { flex-shrink: 0; padding: 3px 10px; border-radius: 12px; font-size: 0.72em; font-weight: bold; color: white; background: #2d6a4f; margin-top: 2px; }
+  .script-line.cust .script-tag { background: #718096; }
+  .script-text { font-size: 0.86em; line-height: 1.7; color: #2d3748; }
+
+  /* Number grid */
+  .number-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 12px; }
+  .number-card { background: linear-gradient(135deg, #ffffff, #f8fafc); border-radius: 10px; padding: 12px; text-align: center; border-top: 3px solid #1f3a5f; }
+  .number-big { font-size: 1.5em; font-weight: bold; line-height: 1.2; margin: 4px 0; color: #1f3a5f; }
+  .number-label { font-size: 0.72em; color: #718096; margin-bottom: 4px; }
+  .number-note { font-size: 0.7em; color: #a0aec0; margin-top: 4px; }
+
+  /* Check cards */
+  .check-card { background: #f8fafc; border-left: 4px solid; padding: 12px 14px; border-radius: 6px; margin-bottom: 10px; }
+  .check-card .c-head { font-weight: bold; font-size: 0.93em; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+  .check-card .c-body { font-size: 0.85em; color: #4a5568; line-height: 1.65; }
+  .check-card .c-ex { margin-top: 7px; font-size: 0.8em; color: #4a5568; background: white; padding: 8px 11px; border-radius: 4px; font-style: italic; line-height: 1.6; border-left: 2px solid #cbd5e0; }
+
+
+.vl-zoom-body {
+  background: rgba(0,0,0,0.25);
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.vl-zoom-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.vl-zoom-key {
+  font-size: 0.72em;
+  color: #d4af37;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.vl-zoom-val {
+  font-size: 0.82em;
+  color: #f0e6c0;
+  background: rgba(255,255,255,0.07);
+  border-radius: 4px;
+  padding: 5px 8px;
+  word-break: break-all;
+}
+.vl-zoom-link {
+  text-decoration: none;
+  color: #90caf9;
+}
+.vl-zoom-link:hover { text-decoration: underline; }
+.vl-zoom-pass {
+  font-family: monospace;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+}
+
+/* ===== 解説動画ライブラリ ===== */
+.video-library {
+  max-width: 1180px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+.vl-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(212,175,55,0.4);
+}
+.vl-icon { font-size: 1.3em; }
+.vl-title {
+  font-size: 1.15em;
+  font-weight: 800;
+  color: #d4af37;
+  letter-spacing: 0.08em;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+}
+.vl-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+.vl-card {
+  background: linear-gradient(160deg, #1a2e1f 0%, #0d1f13 100%);
+  border: 1.5px solid rgba(212,175,55,0.4);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.vl-label {
+  font-size: 0.78em;
+  font-weight: 700;
+  color: #f0e6c0;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vl-thumb {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  background: #000;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.vl-thumb iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border-radius: 6px;
+}
+.vl-btn {
+  display: inline-block;
+  text-align: center;
+  background: rgba(212,175,55,0.15);
+  border: 1px solid rgba(212,175,55,0.5);
+  color: #d4af37;
+  font-size: 0.72em;
+  font-weight: 700;
+  padding: 5px 8px;
+  border-radius: 6px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background 0.2s;
+}
+.vl-btn:hover { background: rgba(212,175,55,0.3); }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>資産形成スクール 完全版スクリプト</h1>
+  <p>営業教育マインドマップ</p>
+  <div class="hint">👆 各ステップをタップすると詳細スクリプトが表示されます</div>
+</div>
+
+
+<div class="flow-mindmap">
+  <div class="fm-steps">
+    <button class="fm-step n1" onclick="openModal('pillar1')">
+      <div class="fm-step-head"><span class="fm-num">①</span><span class="fm-title">世間話</span></div>
+      <span class="fm-tap">タップして詳細</span>
+    </button>
+    <div class="fm-arrow">▶</div>
+    <button class="fm-step n3" onclick="openModal('pillar3')">
+      <div class="fm-step-head"><span class="fm-num">②</span><span class="fm-title">危機感の醸成</span></div>
+      <span class="fm-tap">タップして詳細</span>
+    </button>
+    <div class="fm-arrow">▶</div>
+    <button class="fm-step n4" onclick="openModal('pillar4')">
+      <div class="fm-step-head"><span class="fm-num">③</span><span class="fm-title">プレゼン</span></div>
+      <span class="fm-tap">タップして詳細</span>
+    </button>
+    <div class="fm-arrow">▶</div>
+    <button class="fm-step n5" onclick="openModal('pillar5')">
+      <div class="fm-step-head"><span class="fm-num">④</span><span class="fm-title">クロージング</span></div>
+      <span class="fm-tap">タップして詳細</span>
+    </button>
+  </div>
+</div>
+
+<div class="video-library">
+  <div class="vl-header">
+    <span class="vl-icon">📽</span>
+    <span class="vl-title">解説動画ライブラリ</span>
+  </div>
+  <div class="vl-grid">
+    <div class="vl-card">
+      <div class="vl-label">プレゼン部分</div>
+      <div class="vl-thumb">
+        <iframe src="https://www.youtube.com/embed/7aluKfSWA3o" frameborder="0" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <a class="vl-btn" href="https://youtu.be/7aluKfSWA3o" target="_blank">YouTubeで再生</a>
+    </div>
+    <div class="vl-card">
+      <div class="vl-label">クロージング部分</div>
+      <div class="vl-thumb">
+        <iframe src="https://www.youtube.com/embed/lUbAlSifwqo" frameborder="0" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <a class="vl-btn" href="https://youtu.be/lUbAlSifwqo" target="_blank">YouTubeで再生</a>
+    </div>
+    <div class="vl-card">
+      <div class="vl-label">プレゼン解説動画</div>
+      <div class="vl-thumb">
+        <iframe src="https://www.youtube.com/embed/cBJ6uNiFMPA" frameborder="0" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <a class="vl-btn" href="https://youtu.be/cBJ6uNiFMPA" target="_blank">YouTubeで再生</a>
+    </div>
+    <div class="vl-card">
+      <div class="vl-label">クロージング解説動画</div>
+      <div class="vl-thumb">
+        <iframe src="https://www.youtube.com/embed/2By6UgbsVDc" frameborder="0" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <a class="vl-btn" href="https://youtu.be/2By6UgbsVDc" target="_blank">YouTubeで再生</a>
+    </div>
+    <div class="vl-card">
+      <div class="vl-label">あき姉（流入元）</div>
+      <div class="vl-zoom-body" style="justify-content:center;align-items:center;min-height:80px;">
+        <div style="text-align:center;">
+          <div style="font-size:2em;margin-bottom:6px;">▶️</div>
+          <div style="font-size:0.78em;color:#90caf9;word-break:break-all;">youtube.com/@akineefp</div>
+        </div>
+      </div>
+      <a class="vl-btn" href="https://www.youtube.com/@akineefp" target="_blank">チャンネルを開く</a>
+    </div>
+    <div class="vl-card">
+      <div class="vl-label">契約書送付方法</div>
+      <div class="vl-zoom-body">
+        <div class="vl-zoom-row">
+          <span class="vl-zoom-key">URL</span>
+          <a class="vl-zoom-val vl-zoom-link" href="https://us06web.zoom.us/rec/share/BA4YHJS_70RFIc0a-EGCUD-kka0KD1zU-kRDjNou6eZwT0sknQ7HbY-FRGrkZO8.Hny2oNByUdPevWWF" target="_blank">https://us06we...</a>
+        </div>
+        <div class="vl-zoom-row">
+          <span class="vl-zoom-key">パスコード</span>
+          <span class="vl-zoom-val vl-zoom-pass">.3ux5gP7</span>
+        </div>
+      </div>
+      <a class="vl-btn" href="https://us06web.zoom.us/rec/share/BA4YHJS_70RFIc0a-EGCUD-kka0KD1zU-kRDjNou6eZwT0sknQ7HbY-FRGrkZO8.Hny2oNByUdPevWWF" target="_blank">動画を開く</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modalContainer" onclick="closeIfBackdrop(event)">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<script>
+/* ========== 資産形成スクール DATA ========== */
+const SCHOOL = {
+  name: "資産形成スクール",
+
+  /* ===== ① 世間話 ===== */
+  pillar1: {
+    purpose: "<span class='hl-red'>『この人であれば信頼できそう』</span>という最低限の信頼関係を構築することが商談全体の土台になります。\nお金の話は非常にセンシティブなため、関係構築が浅い状態では本音のヒアリングができません。\n<span class='hl-red'>表面的な世間話ではなく、本気で相手を知ろうとする姿勢</span>が大切です。\nお客様が『この人には正直に話せる』と感じた瞬間に、商談が動き始めます。",
+    mustUseTalks: [
+      {
+        text: "○○さんが今回、資産形成や投資に興味を持ったきっかけって何かあったんですか？",
+        intent: "投資への関心の背景（老後不安・給与への不満・SNSで知った等）を引き出し、その後の問題提起で使うキーワードを事前に把握する。お客様自身に言語化させることでその後のトークが刺さりやすくなる。"
+      },
+      {
+        text: "理想としては、いくらぐらいの資産をいつまでに作りたいというイメージはありますか？",
+        intent: "具体的な数字と期限を持っていない人が大半。目標が曖昧だと行動が遅くなるため、自分でゴールを言語化させることで危機感と動機付けの両方を強める。後のプレゼンで『だからこそ今動く必要がある』と繋げられる。"
+      },
+      {
+        text: "今、貯金や積立以外で何かお金を増やす取り組みはされていますか？",
+        intent: "現状の行動（or 無行動）を把握し、『やっているが成果が出ていない』または『何もしていない』という現状を確認する。この回答が問題提起の出発点になる。"
+      },
+      {
+        text: "お仕事はどういったことをされているんですか？収入の安定度や将来性はどう感じていますか？",
+        intent: "職業・収入状況を自然に把握する。給与への不安・昇給の見通し・副収入への関心を探り、資産形成の必要性をより個人に紐付けて語れるようにする。"
+      }
+    ],
+    tip: "お金の話は警戒されやすいため、最初の5分は資産や投資の話を一切せず、仕事・家族・趣味の話を深掘りすることが重要です。相手が自発的に『実はお金のことが心配で』と話してくれる状態が理想です。",
+    ngok: [
+      { sit: "世間話を飛ばして即資産形成の説明", ng: "本日はありがとうございます。さっそく弊社のカリキュラムをご説明します…", ok: "本題の前に、少し○○さんのことを教えてください。普段どんなお仕事されているんですか？" },
+      { sit: "お金の話を最初から持ち出す", ng: "今、年収はどれくらいですか？貯金はどのくらいあります？", ok: "旅行や趣味はよく楽しまれますか？（自然な会話から徐々に生活スタイルや価値観を引き出す）" },
+      { sit: "一方的に話して深掘りしない", ng: "（軽く答えてもらった）なるほど。では本題に入りましょう。", ok: "それ面白いですね！詳しく教えてもらえますか？なんでそのお仕事を選んだんですか？" },
+      { sit: "お客様の不安を軽視する", ng: "投資は誰でもできますから心配しなくて大丈夫ですよ。", ok: "投資に対して不安を感じるのは当然ですよ。それだけ真剣に考えている証拠だと思います。" }
+    ]
+  },
+
+
+
+
+  /* ===== ③ 危機感の醸成 ===== */
+  pillar3: {
+    slides: [
+      {
+        page: "P.1",
+        title: "自己紹介・運営会社紹介",
+        customHtml: `<div class="sv-wrap" style="background:linear-gradient(135deg,#f5efe0 0%,#ede3ce 40%,#ddd0b8 100%);min-height:340px;position:relative;overflow:hidden;">
+          <!-- geometric shapes -->
+          <div style="position:absolute;top:0;left:30%;width:220px;height:220px;background:rgba(255,255,255,0.18);transform:rotate(25deg) translateY(-80px);border-radius:8px;"></div>
+          <div style="position:absolute;bottom:-40px;left:10%;width:180px;height:180px;background:rgba(255,255,255,0.13);transform:rotate(-15deg);border-radius:6px;"></div>
+          <div style="position:absolute;top:10%;right:35%;width:140px;height:140px;background:rgba(255,255,255,0.10);transform:rotate(45deg);border-radius:4px;"></div>
+          <!-- dotted patterns -->
+          <div style="position:absolute;top:8%;right:28%;font-size:0.5em;color:rgba(100,120,160,0.25);letter-spacing:6px;line-height:2em;">・・・・・・<br>・・・・・・<br>・・・・・・<br>・・・・・・<br>・・・・・・</div>
+          <div style="position:absolute;bottom:15%;left:38%;font-size:0.5em;color:rgba(100,120,160,0.2);letter-spacing:6px;line-height:2em;">・・・・・<br>・・・・・<br>・・・・・<br>・・・・・</div>
+          <!-- top-left badge -->
+          <div style="position:absolute;top:0;left:0;background:#1a2f54;color:#fff;font-weight:900;font-size:clamp(0.6em,1.5vw,0.82em);padding:2.5% 5%;letter-spacing:0.05em;">無料相談会</div>
+          <!-- top-right prep box -->
+          <div style="position:absolute;top:4%;right:3%;background:rgba(255,255,255,0.92);border-radius:8px;padding:3% 4%;min-width:clamp(110px,22%,180px);box-shadow:0 2px 10px rgba(0,0,0,0.08);">
+            <div style="color:#1a2f54;font-weight:800;font-size:clamp(0.48em,1.1vw,0.66em);margin-bottom:6%;letter-spacing:0.03em;">下記の準備をお願いします！</div>
+            <div style="font-size:clamp(0.45em,1.05vw,0.62em);color:#2d3748;line-height:2em;">
+              <span style="display:inline-block;background:#1a2f54;color:#fff;border-radius:50%;width:1.4em;height:1.4em;text-align:center;line-height:1.4em;margin-right:5px;font-weight:900;">1</span>オーディオに接続<br>
+              <span style="display:inline-block;background:#1a2f54;color:#fff;border-radius:50%;width:1.4em;height:1.4em;text-align:center;line-height:1.4em;margin-right:5px;font-weight:900;">2</span>カメラをON<br>
+              <span style="display:inline-block;background:#1a2f54;color:#fff;border-radius:50%;width:1.4em;height:1.4em;text-align:center;line-height:1.4em;margin-right:5px;font-weight:900;">3</span>マイクをON
+            </div>
+          </div>
+          <!-- main content -->
+          <div style="position:relative;z-index:2;padding:10% 5% 5% 5%;display:flex;flex-direction:column;gap:2%;min-height:340px;">
+            <div style="margin-top:4%;">
+              <div style="color:#1a2f54;font-weight:700;font-size:clamp(0.7em,1.8vw,1em);letter-spacing:0.05em;margin-bottom:2%;">今から始める</div>
+              <div style="color:#1a2f54;font-weight:900;font-size:clamp(1.8em,6vw,3.4em);line-height:1.15;letter-spacing:0.02em;">資産形成</div>
+              <div style="color:#1a2f54;font-weight:600;font-size:clamp(0.55em,1.4vw,0.78em);margin-top:3%;letter-spacing:0.03em;">未来の安心を手に入れる、最初の一歩を踏み出そう！</div>
+            </div>
+            <!-- right side buttons -->
+            <div style="position:absolute;bottom:22%;right:3%;display:flex;flex-direction:column;gap:3%;z-index:3;">
+              <div style="background:#3a7d7d;color:#fff;font-weight:700;font-size:clamp(0.5em,1.3vw,0.72em);padding:2.5% 6%;border-radius:30px;text-align:center;white-space:nowrap;">参加無料</div>
+              <div style="background:#2d6a6a;color:#fff;font-weight:700;font-size:clamp(0.5em,1.3vw,0.72em);padding:2.5% 6%;border-radius:30px;text-align:center;white-space:nowrap;">オンライン</div>
+              <div style="background:#1a2f54;color:#fff;font-weight:700;font-size:clamp(0.5em,1.3vw,0.72em);padding:2.5% 6%;border-radius:30px;text-align:center;white-space:nowrap;">お役立ち情報</div>
+            </div>
+            <!-- bottom -->
+            <div style="position:absolute;bottom:4%;left:5%;display:flex;align-items:center;gap:3%;z-index:3;">
+              <span style="color:#1a2f54;font-weight:800;font-size:clamp(0.52em,1.3vw,0.72em);">主催</span>
+              <span style="background:#1a2f54;color:#fff;font-weight:900;font-size:clamp(0.55em,1.35vw,0.75em);padding:1.5% 4%;border-radius:20px;letter-spacing:0.08em;">Horizon</span>
+              <span style="color:#1a2f54;font-weight:600;font-size:clamp(0.48em,1.2vw,0.68em);">東京都新宿区西新宿6-16-6 新宿タツミビル9F</span>
+            </div>
+          </div>
+        </div>`,
+        talk: "改めまして、今回はあき姉監修で無料相談会を実施させて頂きます。\n担当の○○と申します。よろしくお願い致します。\n\n運営会社は、合同会社Horizonで新宿区西新宿に会社があります。\n主にSNSマーケを主力事業としており、あき先生と連携を図り資産形成の重要性を伝える場を提供しております。"
+      },
+      {
+        page: "P.2",
+        title: "現状の悩み、不安、解決したいこと",
+        customHtml: `<div class="sv-wrap" style="background:#f0f0f0;min-height:320px;">
+          <!-- header -->
+          <div style="background:#2ab0b0;padding:3.5% 4%;text-align:center;">
+            <span style="color:#fff;font-weight:900;font-size:clamp(0.9em,2.8vw,1.6em);letter-spacing:0.05em;">現状の悩み、不安、解決したいこと</span>
+          </div>
+          <!-- body -->
+          <div style="padding:5% 6%;display:flex;flex-direction:column;gap:4%;">
+            <div style="color:#111;font-weight:800;font-size:clamp(0.7em,1.8vw,1em);">□ 目標</div>
+            <div style="display:inline-block;background:#ffff00;padding:1.8% 4%;border-radius:2px;align-self:flex-start;">
+              <span style="color:#111;font-weight:900;font-size:clamp(0.75em,2vw,1.1em);letter-spacing:0.03em;">老後資金：3000万（65歳）</span>
+            </div>
+          </div>
+        </div>`,
+        talk: "まず、連日大変多くの方々にお越し頂いているのですが、皆様の状況によって資産状況や目標が異なり目標と現状のギャップによって行うべき投資戦略が変わってきますので、まずは目標を整理させてください。\n\n皆さんの状況を伺うと、目標は主に3つに分類されているケースが殆どです。\n①老後資金\n②教育資金\n③余剰資金\n\nこの中だと、いかがでしょうか？\nやはり老後に対する不安は強いですよね・・・。\nそれでは、物価の上昇等を考慮して老後2000万では足らないと言われているので老後3000万を目標にしますね。"
+      },
+      {
+        page: "P.3",
+        title: "現在の資産運用状況は？",
+        customHtml: `<div class="sv-wrap" style="background:#f0f0f0;min-height:360px;">
+          <div style="background:#2ab0b0;padding:3.5% 4%;text-align:center;">
+            <span style="color:#fff;font-weight:900;font-size:clamp(0.9em,2.8vw,1.6em);letter-spacing:0.05em;">現在の資産運用状況は？</span>
+          </div>
+          <div style="padding:4% 6%;display:flex;flex-direction:column;gap:5%;">
+            <div>
+              <div style="margin-bottom:3%;">
+                <span style="color:#111;font-weight:900;font-size:clamp(0.75em,2vw,1.1em);">①</span>
+                <span style="background:#00e600;padding:1% 2%;font-weight:900;font-size:clamp(0.75em,2vw,1.1em);color:#111;">無リスク資産</span>
+                <span style="color:#111;font-weight:700;font-size:clamp(0.6em,1.55vw,0.88em);">（元本割れの確率が低いもしくは、可能性が0の資産）</span>
+              </div>
+              <div style="padding-left:5%;display:flex;flex-direction:column;gap:2%;font-size:clamp(0.65em,1.65vw,0.92em);color:#111;font-weight:600;line-height:1.8;">
+                <div>・銀行預金：</div>
+                <div>・貯蓄型保険：</div>
+                <div>・学資保険：</div>
+                <div>・iDeCo：</div>
+                <div>・国債：</div>
+              </div>
+            </div>
+            <div>
+              <div style="margin-bottom:3%;">
+                <span style="color:#111;font-weight:900;font-size:clamp(0.75em,2vw,1.1em);">②</span>
+                <span style="background:#00e600;padding:1% 2%;font-weight:900;font-size:clamp(0.75em,2vw,1.1em);color:#111;">リスク資産＝お金に働いてもらう資産。</span>
+              </div>
+              <div style="padding-left:5%;display:flex;flex-direction:column;gap:2%;font-size:clamp(0.65em,1.65vw,0.92em);font-weight:600;line-height:1.8;">
+                <div style="color:#111;">・投資信託(<span style="color:#c0392b;">株の複合体</span>)：</div>
+                <div style="color:#2e86c1;">・株式投資：</div>
+                <div style="color:#111;">・社債：</div>
+                <div style="color:#111;">・不動産：</div>
+              </div>
+            </div>
+          </div>
+        </div>`,
+        talk: "続きまして、目標に対して現状のポートフォリオを整理させてください。\n目標と現状のギャップの大きさによって、行うべき投資の戦略が大きく変わりますので。\n\nまず、今後の生活のために預金はどれくらいありますか？\n毎月、コンスタントにいくら貯金できてますか？\n（以下、順番通りに聞いていく。）"
+      },
+      {
+        page: "P.4",
+        title: "個別株の分析方法",
+        customHtml: `
+<div class="sv-wrap" style="background:#f0f4f8;min-height:420px;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <div style="background:#2a8080;color:#fff;font-size:1.25em;font-weight:700;text-align:center;padding:14px 10px;letter-spacing:0.05em;">個別株の分析方法</div>
+  <div style="padding:10px 8px 6px;text-align:center;">
+    <div style="display:inline-block;background:#3d4f6e;color:#fff;border-radius:8px;padding:7px 28px;font-weight:700;font-size:0.9em;margin-bottom:6px;">ファンダメンタルズ分析</div>
+    <div style="display:flex;justify-content:center;gap:80px;margin-bottom:4px;">
+      <div style="background:#3d4f6e;color:#fff;border-radius:8px;padding:6px 18px;font-weight:700;font-size:0.85em;display:inline-block;">マクロ分析</div>
+      <div style="background:#3d4f6e;color:#fff;border-radius:8px;padding:6px 18px;font-weight:700;font-size:0.85em;display:inline-block;">ミクロ分析</div>
+    </div>
+    <div style="display:flex;justify-content:center;gap:5px;flex-wrap:wrap;margin:6px 2px 4px;">
+      <div style="background:#b8d8e8;border:1.5px solid #7aaec0;border-radius:6px;padding:5px 9px;font-size:0.76em;font-weight:600;color:#1a3040;">景気</div>
+      <div style="background:#b8d8e8;border:1.5px solid #7aaec0;border-radius:6px;padding:5px 9px;font-size:0.76em;font-weight:600;color:#1a3040;">金利</div>
+      <div style="background:#b8d8e8;border:1.5px solid #7aaec0;border-radius:6px;padding:5px 9px;font-size:0.76em;font-weight:600;color:#1a3040;">為替</div>
+      <div style="background:#b8d8e8;border:1.5px solid #7aaec0;border-radius:6px;padding:5px 9px;font-size:0.76em;font-weight:600;color:#1a3040;">投資家の動向</div>
+      <div style="background:#b8d8e8;border:1.5px solid #7aaec0;border-radius:6px;padding:5px 9px;font-size:0.76em;font-weight:600;color:#1a3040;">企業業績</div>
+      <div style="background:#b8d8e8;border:1.5px solid #7aaec0;border-radius:6px;padding:5px 9px;font-size:0.76em;font-weight:600;color:#1a3040;">需給動向</div>
+      <div style="background:#b8d8e8;border:1.5px solid #7aaec0;border-radius:6px;padding:5px 9px;font-size:0.76em;font-weight:600;color:#1a3040;">株価指標</div>
+    </div>
+    <div style="background:#f5e8c8;border:1.5px solid #d4b87a;border-radius:6px;padding:8px 20px;font-size:0.9em;font-weight:700;color:#5a3d0a;margin:6px 8px;text-align:center;">基礎知識を学ぶために</div>
+    <div style="display:flex;justify-content:center;gap:4px;flex-wrap:wrap;margin:0 2px;">
+      <div style="background:#b8d8e8;border:1.5px solid #7aaec0;border-radius:6px;padding:4px 7px;font-size:0.7em;font-weight:600;color:#1a3040;text-align:center;">景気の<br>基礎</div>
+      <div style="background:#b8d8e8;border:1.5px solid #7aaec0;border-radius:6px;padding:4px 7px;font-size:0.7em;font-weight:600;color:#1a3040;text-align:center;">金利の<br>しくみ</div>
+      <div style="background:#b8d8e8;border:1.5px solid #7aaec0;border-radius:6px;padding:4px 7px;font-size:0.7em;font-weight:600;color:#1a3040;text-align:center;">為替の<br>基本</div>
+      <div style="background:#b8d8e8;border:1.5px solid #7aaec0;border-radius:6px;padding:4px 7px;font-size:0.7em;font-weight:600;color:#1a3040;text-align:center;">投資家の<br>タイプ</div>
+      <div style="background:#b8d8e8;border:1.5px solid #7aaec0;border-radius:6px;padding:4px 7px;font-size:0.7em;font-weight:600;color:#1a3040;text-align:center;">決算書・<br>四季報の見方</div>
+      <div style="background:#b8d8e8;border:1.5px solid #7aaec0;border-radius:6px;padding:4px 7px;font-size:0.7em;font-weight:600;color:#1a3040;text-align:center;">信用取引<br>と需給</div>
+      <div style="background:#b8d8e8;border:1.5px solid #7aaec0;border-radius:6px;padding:4px 7px;font-size:0.7em;font-weight:600;color:#1a3040;text-align:center;">PER・PBR・<br>ROEなど</div>
+    </div>
+  </div>
+</div>`,
+        talk: "それでは、具体的に個別株はどのように分析するのかという事なのですが、前提としてファンダメンタルズ分析ができないと話にならないと思ってください。\n\n一般的に言われるPER、PBRとか指標を参考にすれば良いという事ではなく【会社の実態】を掴むことが重要だと考えています。\n表面的な指標はほぼ意味が無いので、会社をコントロールしている経営陣はどのような人で、どのような事業戦略で、どのようなマーケットで会社を成長させようとしているのかという実態を掴むことが重要です。\n\nただ、全てこの場で説明をするのは時間的に厳しいので、1つの企業を例に出して分析してみますが、例えば【味の素】が近年で大きな変革を遂げている最中というのはご存知でしょうか？"
+      },
+      {
+        page: "P.5",
+        title: "味の素を分析してみましょう！",
+        customHtml: `
+<div class="sv-wrap" style="background:#fff;min-height:360px;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <div style="background:#2a8080;color:#fff;font-size:1.2em;font-weight:700;text-align:center;padding:14px 10px;letter-spacing:0.05em;">味の素を分析してみましょう！</div>
+  <div style="display:flex;justify-content:center;align-items:center;gap:0;padding:30px 10px 10px;border-bottom:1px solid #ddd;">
+    <!-- TEAM JAPAN -->
+    <div style="flex:1;text-align:center;padding:0 10px;border-right:1px solid #ccc;">
+      <div style="font-size:0.6em;font-weight:700;color:#333;letter-spacing:0.05em;margin-bottom:4px;">TEAM JAPAN</div>
+      <div style="width:60px;height:60px;margin:0 auto;background:linear-gradient(135deg,#d4af37 0%,#d4af37 40%,transparent 40%);border:2px solid #d4af37;border-radius:4px;display:flex;align-items:center;justify-content:center;">
+        <div style="width:36px;height:36px;background:#cc0000;border-radius:50%;"></div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:2px;margin-top:4px;">
+        <div style="width:10px;height:10px;background:#0085c7;border-radius:50%;"></div>
+        <div style="width:10px;height:10px;background:#f4c300;border-radius:50%;"></div>
+        <div style="width:10px;height:10px;background:#000;border-radius:50%;"></div>
+        <div style="width:10px;height:10px;background:#009f6b;border-radius:50%;"></div>
+        <div style="width:10px;height:10px;background:#df0024;border-radius:50%;"></div>
+      </div>
+    </div>
+    <!-- AJINOMOTO -->
+    <div style="flex:1;text-align:center;padding:0 15px;border-right:1px solid #ccc;">
+      <div style="font-size:1.8em;font-weight:900;color:#cc0000;font-style:italic;letter-spacing:-0.02em;line-height:1;">Aj</div>
+      <div style="font-size:0.65em;font-weight:800;color:#cc0000;letter-spacing:0.08em;margin-top:2px;">AJINOMOTO.</div>
+    </div>
+    <!-- JAPAN PARALYMPIC TEAM -->
+    <div style="flex:1;text-align:center;padding:0 10px;">
+      <div style="width:50px;height:50px;margin:0 auto;background:linear-gradient(135deg,#f97c00,#e60012,#8b1a6b);border-radius:50%;"></div>
+      <div style="font-size:0.55em;font-weight:700;color:#333;letter-spacing:0.04em;margin-top:4px;line-height:1.3;">JAPAN<br>PARALYMPIC TEAM</div>
+    </div>
+  </div>
+  <div style="text-align:center;padding:14px 16px;color:#333;font-size:0.85em;line-height:1.6;">
+    <span style="font-weight:700;">TEAM JAPAN ゴールドパートナー</span><br>
+    （調味料、乾燥スープ、栄養補助食品、冷凍食品、コーヒー豆）
+  </div>
+</div>`,
+        talk: "○○さん、味の素って何の会社ですかと聞かれたら何て答えますでしょうか？\n（食品ですよね。）\n\nご認識通り、一般的には食品会社を連想しますよね。\n一方で、我々投資家からすると近年の味の素は最早食品会社とは言えない会社になりつつあるのです。"
+      },
+      {
+        page: "P.6",
+        title: "味の素を分析してみましょう！（事業構造）",
+        customHtml: `
+<div class="sv-wrap" style="background:#fff;min-height:400px;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <div style="background:#2a8080;color:#fff;font-size:1.15em;font-weight:700;text-align:center;padding:12px 10px;letter-spacing:0.05em;">味の素を分析してみましょう！</div>
+  <div style="display:flex;gap:0;padding:12px 8px;align-items:flex-start;">
+    <!-- Left: Bar chart -->
+    <div style="flex:1.1;padding-right:10px;">
+      <div style="display:flex;align-items:flex-end;gap:18px;height:200px;position:relative;padding-left:24px;border-left:2px solid #333;border-bottom:2px solid #333;">
+        <!-- Y-axis label -->
+        <div style="position:absolute;left:-20px;top:50%;transform:translateY(-50%) rotate(-90deg);font-size:0.65em;font-weight:700;color:#333;white-space:nowrap;letter-spacing:0.1em;">事業利益</div>
+        <!-- FY21 bar -->
+        <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+          <div style="background:#2d4fa0;width:100%;height:58px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.58em;font-weight:700;text-align:center;line-height:1.2;">バイオ&amp;<br>ファインケミカル<br>事業</div>
+          <div style="background:#e8821e;width:100%;height:82px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.7em;font-weight:700;text-align:center;line-height:1.3;">食 品<br>事業</div>
+          <div style="font-size:0.65em;font-weight:700;margin-top:4px;color:#333;">FY21</div>
+        </div>
+        <!-- Ratio label FY21 -->
+        <div style="position:absolute;left:86px;top:60px;font-size:0.7em;font-weight:700;color:#fff;background:rgba(0,0,0,0.4);padding:1px 4px;border-radius:3px;">1 : 2</div>
+        <!-- Red speech bubble -->
+        <div style="position:absolute;left:140px;top:10px;background:#cc0000;color:#fff;border-radius:10px;padding:7px 10px;font-size:0.72em;font-weight:700;text-align:center;line-height:1.4;">年平均成長率<br>約<span style="font-size:1.4em;">10</span>%〜</div>
+        <!-- Dashed arrow -->
+        <div style="position:absolute;left:100px;top:60px;width:70px;height:80px;border-top:2px dashed #666;border-right:2px dashed #666;border-radius:0 10px 0 0;"></div>
+        <!-- FY30 bar -->
+        <div style="display:flex;flex-direction:column;align-items:center;width:80px;margin-left:30px;">
+          <div style="background:#2d4fa0;width:100%;height:90px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.7em;font-weight:700;text-align:center;line-height:1.3;">バイオ&amp;ファ<br>インケミカル<br>事業</div>
+          <div style="background:#e8821e;width:100%;height:90px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.75em;font-weight:700;text-align:center;line-height:1.3;">食 品<br>事業</div>
+          <div style="font-size:0.65em;font-weight:700;margin-top:4px;color:#333;">FY30計画</div>
+        </div>
+        <!-- Ratio label FY30 -->
+        <div style="position:absolute;right:6px;top:105px;font-size:0.7em;font-weight:700;color:#fff;background:rgba(0,0,0,0.4);padding:1px 4px;border-radius:3px;">1 : 1</div>
+      </div>
+    </div>
+    <!-- Right: 4つの成長領域 -->
+    <div style="flex:1.2;padding-left:8px;">
+      <div style="font-size:0.85em;font-weight:700;color:#333;border:2px solid #333;padding:3px 8px;display:inline-block;margin-bottom:6px;">4つの成長領域</div>
+      <div style="margin-bottom:5px;">
+        <div style="background:#e84060;color:#fff;font-size:0.75em;font-weight:700;text-align:center;padding:3px;border-radius:3px 3px 0 0;">ヘルスケア</div>
+        <div style="font-size:0.68em;color:#333;padding:3px 4px;line-height:1.4;">治療や予防の進化と、健康寿命の延伸への貢献</div>
+      </div>
+      <div style="margin-bottom:5px;">
+        <div style="background:#e8921e;color:#fff;font-size:0.75em;font-weight:700;text-align:center;padding:3px;border-radius:3px 3px 0 0;">フード＆ウェルネス</div>
+        <div style="font-size:0.68em;color:#333;padding:3px 4px;line-height:1.4;">食を通じたWell-beingと自己実現への貢献</div>
+      </div>
+      <div style="margin-bottom:5px;">
+        <div style="background:#2d5fc4;color:#fff;font-size:0.75em;font-weight:700;text-align:center;padding:3px;border-radius:3px 3px 0 0;">ICT</div>
+        <div style="font-size:0.68em;color:#333;padding:3px 4px;line-height:1.4;">半導体の進化と、スマート社会への貢献</div>
+      </div>
+      <div style="margin-bottom:5px;">
+        <div style="background:#2e9e50;color:#fff;font-size:0.75em;font-weight:700;text-align:center;padding:3px;border-radius:3px 3px 0 0;">グリーン</div>
+        <div style="font-size:0.68em;color:#333;padding:3px 4px;line-height:1.4;">新しい食のスタンダードの創造 循環型バイオサイクルへの転換</div>
+      </div>
+    </div>
+  </div>
+</div>`,
+        talk: "実は、味の素の食品事業の割合は年々減少傾向にあり今では事業の半分くらいの割合しかありません。\n食品事業の代わりに色々とやっているのですが、今はまさかの半導体事業がメインになりつつあります。\n\nもう少し具体化すると、半導体に必要な絶縁材という材料があり絶縁材にアミノ酸が活きるという事が研究で証明されまして、この絶縁材のシェアが世界でほぼ100%を誇っている独占企業になります。\n\n嘘だと思われたら嫌なので、念のためGoogleで検索しますね。笑\n（敢えて、画面共有しながらGoogleで【味の素 半導体】と検索する。）"
+      },
+      {
+        page: "P.7",
+        title: "Google検索「味の素 半導体」",
+        customHtml: `
+<div class="sv-wrap" style="background:#fff;min-height:340px;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <!-- Google search bar -->
+  <div style="padding:16px 16px 10px;border-bottom:1px solid #e0e0e0;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span style="font-size:1.4em;font-weight:700;letter-spacing:-0.02em;"><span style="color:#4285f4;">G</span><span style="color:#ea4335;">o</span><span style="color:#fbbc05;">o</span><span style="color:#4285f4;">g</span><span style="color:#34a853;">l</span><span style="color:#ea4335;">e</span></span>
+      <div style="flex:1;border:1.5px solid #ccc;border-radius:24px;padding:8px 16px;font-size:0.9em;color:#333;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,0.1);">味の素 半導体</div>
+    </div>
+    <div style="display:flex;gap:16px;margin-top:10px;font-size:0.78em;color:#666;border-bottom:2px solid #1a73e8;padding-bottom:6px;width:fit-content;">
+      <span>AIモード</span>
+      <span style="color:#1a73e8;font-weight:700;border-bottom:2px solid #1a73e8;padding-bottom:6px;margin-bottom:-8px;">すべて</span>
+      <span>ショッピング</span>
+      <span>画像</span>
+      <span>動画</span>
+      <span>ニュース</span>
+    </div>
+  </div>
+  <!-- AI summary -->
+  <div style="padding:14px 16px;">
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;">
+      <span style="color:#4285f4;font-size:1.1em;">✦</span>
+      <span style="font-size:0.82em;color:#444;font-weight:600;">AI による概要</span>
+    </div>
+    <div style="display:flex;gap:12px;align-items:flex-start;">
+      <div style="flex:1;font-size:0.82em;color:#333;line-height:1.75;">
+        食品のイメージが強い味の素は、<span style="background:#d0e4ff;padding:1px 0;border-radius:2px;font-weight:600;">高性能なパソコンやAI用CPUなどの半導体パッケージ基板に不可欠な絶縁フィルム「ABF（味の素ビルドアップフィルム）」で世界シェアのほぼ100%を握る、世界的な半導体の重要企業</span>です。
+        <span style="display:inline-flex;align-items:center;gap:3px;background:#f1f3f4;border-radius:12px;padding:2px 8px;font-size:0.85em;color:#333;margin-left:4px;">
+          <span style="color:#ea4335;font-weight:700;font-size:0.9em;">Aj</span> 味の素株式会社 +2
+        </span>
+      </div>
+      <div style="width:80px;height:70px;background:linear-gradient(135deg,#1a3a1a,#2d6e2d);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+        <div style="text-align:center;">
+          <div style="font-size:0.5em;color:#f0c040;font-weight:700;">味の素</div>
+          <div style="font-size:0.45em;color:#fff;margin-top:2px;">絶好調下の焦慮</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>`,
+        talk: "あ、やはりそうですね。\nこのように絶縁材のシェアが世界でもほぼ100%を誇る独占企業で大きな変革を成し遂げている段階です。"
+      },
+      {
+        page: "P.8",
+        title: "味の素を分析してみましょう！（経営戦略の意図）",
+        customHtml: `
+<div class="sv-wrap" style="background:#fff;min-height:400px;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <div style="background:#2a8080;color:#fff;font-size:1.15em;font-weight:700;text-align:center;padding:12px 10px;letter-spacing:0.05em;">味の素を分析してみましょう！</div>
+  <div style="display:flex;gap:0;padding:12px 8px;align-items:flex-start;">
+    <div style="flex:1.1;padding-right:10px;">
+      <div style="display:flex;align-items:flex-end;gap:18px;height:200px;position:relative;padding-left:24px;border-left:2px solid #333;border-bottom:2px solid #333;">
+        <div style="position:absolute;left:-20px;top:50%;transform:translateY(-50%) rotate(-90deg);font-size:0.65em;font-weight:700;color:#333;white-space:nowrap;letter-spacing:0.1em;">事業利益</div>
+        <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+          <div style="background:#2d4fa0;width:100%;height:58px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.58em;font-weight:700;text-align:center;line-height:1.2;">バイオ&amp;<br>ファインケミカル<br>事業</div>
+          <div style="background:#e8821e;width:100%;height:82px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.7em;font-weight:700;text-align:center;line-height:1.3;">食 品<br>事業</div>
+          <div style="font-size:0.65em;font-weight:700;margin-top:4px;color:#333;">FY21</div>
+        </div>
+        <div style="position:absolute;left:86px;top:60px;font-size:0.7em;font-weight:700;color:#fff;background:rgba(0,0,0,0.4);padding:1px 4px;border-radius:3px;">1 : 2</div>
+        <div style="position:absolute;left:140px;top:10px;background:#cc0000;color:#fff;border-radius:10px;padding:7px 10px;font-size:0.72em;font-weight:700;text-align:center;line-height:1.4;">年平均成長率<br>約<span style="font-size:1.4em;">10</span>%〜</div>
+        <div style="position:absolute;left:100px;top:60px;width:70px;height:80px;border-top:2px dashed #666;border-right:2px dashed #666;border-radius:0 10px 0 0;"></div>
+        <div style="display:flex;flex-direction:column;align-items:center;width:80px;margin-left:30px;">
+          <div style="background:#2d4fa0;width:100%;height:90px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.7em;font-weight:700;text-align:center;line-height:1.3;">バイオ&amp;ファ<br>インケミカル<br>事業</div>
+          <div style="background:#e8821e;width:100%;height:90px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.75em;font-weight:700;text-align:center;line-height:1.3;">食 品<br>事業</div>
+          <div style="font-size:0.65em;font-weight:700;margin-top:4px;color:#333;">FY30計画</div>
+        </div>
+        <div style="position:absolute;right:6px;top:105px;font-size:0.7em;font-weight:700;color:#fff;background:rgba(0,0,0,0.4);padding:1px 4px;border-radius:3px;">1 : 1</div>
+      </div>
+    </div>
+    <div style="flex:1.2;padding-left:8px;">
+      <div style="font-size:0.85em;font-weight:700;color:#333;border:2px solid #333;padding:3px 8px;display:inline-block;margin-bottom:6px;">4つの成長領域</div>
+      <div style="margin-bottom:5px;"><div style="background:#e84060;color:#fff;font-size:0.75em;font-weight:700;text-align:center;padding:3px;border-radius:3px 3px 0 0;">ヘルスケア</div><div style="font-size:0.68em;color:#333;padding:3px 4px;line-height:1.4;">治療や予防の進化と、健康寿命の延伸への貢献</div></div>
+      <div style="margin-bottom:5px;"><div style="background:#e8921e;color:#fff;font-size:0.75em;font-weight:700;text-align:center;padding:3px;border-radius:3px 3px 0 0;">フード＆ウェルネス</div><div style="font-size:0.68em;color:#333;padding:3px 4px;line-height:1.4;">食を通じたWell-beingと自己実現への貢献</div></div>
+      <div style="margin-bottom:5px;"><div style="background:#2d5fc4;color:#fff;font-size:0.75em;font-weight:700;text-align:center;padding:3px;border-radius:3px 3px 0 0;">ICT</div><div style="font-size:0.68em;color:#333;padding:3px 4px;line-height:1.4;">半導体の進化と、スマート社会への貢献</div></div>
+      <div style="margin-bottom:5px;"><div style="background:#2e9e50;color:#fff;font-size:0.75em;font-weight:700;text-align:center;padding:3px;border-radius:3px 3px 0 0;">グリーン</div><div style="font-size:0.68em;color:#333;padding:3px 4px;line-height:1.4;">新しい食のスタンダードの創造 循環型バイオサイクルへの転換</div></div>
+    </div>
+  </div>
+</div>`,
+        talk: "ここまでは、情報収集をすれば誰でも得られる情報になります。\nまた、重要なのが『なぜ、味の素の経営陣は従来の主力事業だった食品事業の割合を減らしてでも別事業に舵を切り始めたのか？』という意図を掴むことが重要です。\n\nこの意図を掴めるようになる事で、今後の会社の方向性を明確化しやすく分析の精度が高まっていく形になります。\nちなみに、間違えても良いので何故だと思いますか？\n\nこれは、仮説ですが日本人の人口って年々減少してますよね？\n2050年には1億人切ると言われているマーケットで、このまま食費事業を軸に企業成長させても売上は伸びないという事は分かりきっていますよね。\nそのため、経営陣は恐らく今のうちに食品事業に依存しない体制を整えておかないと数十年後の会社の売上は非常にまずいのでは？という危機感から新規事業を育て始めたのではないか？という仮説になります。\n\nこのように、他人に明確な説明ができるレベルまで落とし込めれば個別株で勝てるようになる勝率も大きく変わってくるという事になります。"
+      },
+      {
+        page: "P.9",
+        title: "味の素を分析してみましょう！（株価推移）",
+        customHtml: `
+<div class="sv-wrap" style="background:#fff;min-height:380px;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <div style="background:#2a8080;color:#fff;font-size:1.15em;font-weight:700;text-align:center;padding:12px 10px;letter-spacing:0.05em;">味の素を分析してみましょう！</div>
+  <div style="padding:10px 14px 4px;display:flex;justify-content:flex-end;">
+    <div style="background:#cc0000;color:#fff;border-radius:8px;padding:7px 16px;font-size:0.82em;font-weight:700;letter-spacing:0.03em;">EPS 3倍へ (2030) 対FY2022</div>
+  </div>
+  <!-- Chart area -->
+  <div style="position:relative;padding:4px 36px 28px 44px;height:200px;">
+    <!-- Y-axis left label -->
+    <div style="position:absolute;left:0;top:50%;transform:translateY(-50%) rotate(-90deg);font-size:0.6em;color:#333;font-weight:700;white-space:nowrap;letter-spacing:0.1em;">株価（円）</div>
+    <!-- Y-axis right label -->
+    <div style="position:absolute;right:0;top:40%;transform:translateY(-50%) rotate(90deg);font-size:0.55em;color:#333;font-weight:700;white-space:nowrap;line-height:1.2;text-align:center;">事業利益<br>（億円）</div>
+    <!-- Chart SVG -->
+    <svg viewBox="0 0 400 170" style="width:100%;height:100%;">
+      <!-- Grid lines -->
+      <line x1="0" y1="0" x2="400" y2="0" stroke="#e0e0e0" stroke-width="0.5"/>
+      <line x1="0" y1="34" x2="400" y2="34" stroke="#e0e0e0" stroke-width="0.5"/>
+      <line x1="0" y1="68" x2="400" y2="68" stroke="#e0e0e0" stroke-width="0.5"/>
+      <line x1="0" y1="102" x2="400" y2="102" stroke="#e0e0e0" stroke-width="0.5"/>
+      <line x1="0" y1="136" x2="400" y2="136" stroke="#e0e0e0" stroke-width="0.5"/>
+      <line x1="0" y1="170" x2="400" y2="170" stroke="#ccc" stroke-width="1"/>
+      <!-- Orange bars: 事業利益 -->
+      <rect x="10" y="126" width="50" height="44" fill="#e8921e" opacity="0.9"/>
+      <rect x="78" y="122" width="50" height="48" fill="#e8921e" opacity="0.9"/>
+      <rect x="146" y="110" width="50" height="60" fill="#e8921e" opacity="0.9"/>
+      <rect x="214" y="90" width="50" height="80" fill="#e8921e" opacity="0.9"/>
+      <rect x="282" y="78" width="50" height="92" fill="#e8921e" opacity="0.9"/>
+      <rect x="350" y="40" width="50" height="130" fill="#e8921e" opacity="0.9"/>
+      <!-- X-axis labels -->
+      <text x="35" y="185" text-anchor="middle" font-size="11" fill="#555">FY18</text>
+      <text x="103" y="185" text-anchor="middle" font-size="11" fill="#555">FY19</text>
+      <text x="171" y="185" text-anchor="middle" font-size="11" fill="#555">FY20</text>
+      <text x="239" y="185" text-anchor="middle" font-size="11" fill="#555">FY21</text>
+      <text x="307" y="185" text-anchor="middle" font-size="11" fill="#555">FY22</text>
+      <text x="375" y="185" text-anchor="middle" font-size="11" fill="#555">FY23</text>
+      <!-- Red stock price line -->
+      <polyline points="10,148 40,144 70,145 100,140 130,134 160,128 190,118 220,108 250,96 280,88 310,82 340,68 370,52 400,42"
+        fill="none" stroke="#cc2200" stroke-width="2" stroke-linejoin="round"/>
+      <!-- Annotation: 1881 -->
+      <rect x="28" y="108" width="120" height="22" rx="3" fill="#2d4fa0"/>
+      <text x="88" y="123" text-anchor="middle" font-size="9.5" fill="#fff" font-weight="700">株価 1,881円（19年1月末）</text>
+      <!-- Annotation: 6590 -->
+      <text x="260" y="36" text-anchor="middle" font-size="9" fill="#333" font-weight="700">株価 6,590円</text>
+      <text x="260" y="48" text-anchor="middle" font-size="7.5" fill="#555">（24年12月12日 上場来高値更新）</text>
+    </svg>
+  </div>
+  <div style="text-align:right;font-size:0.6em;color:#888;padding:0 14px 6px;">株価：2019年01月31日〜2025年02月28日</div>
+</div>`,
+        talk: "このように、仮に5年前に○○さんが個別株をやっていたと仮定して味の素も分析していて株価が伸びそうだからという理由で200万円分の株を買っていたら今頃600万以上になっていたという事になります。\n\n大企業だから株価はあまり伸びないだろうと思われがちですが、会社は様々な事業戦略を立てて売上の最大化を図っているので会社規模に関係なく業績が上がる会社はガンガン成長していくという形になります。\n\nただ、現実的で恐縮ですが株価が安い状態で購入するためには自身で分析できるようにならないと難しいという事になります。"
+      },
+      {
+        page: "P.10",
+        title: "個別株のインパクト",
+        customHtml: `
+<div class="sv-wrap" style="background:#fff;min-height:420px;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <div style="background:#2a8080;color:#fff;font-size:1.15em;font-weight:700;text-align:center;padding:11px 10px;letter-spacing:0.05em;">個別株のインパクト</div>
+  <div style="padding:8px 10px 4px;">
+    <div style="font-size:1.05em;font-weight:700;color:#cc0000;margin-bottom:2px;">
+      10年前に100万円投資していたら
+      <span style="background:#cc0000;color:#fff;border-radius:12px;padding:2px 8px;font-size:0.7em;margin-left:6px;">日本編</span>
+      <span style="background:#cc0000;color:#fff;border-radius:12px;padding:2px 8px;font-size:0.7em;margin-left:4px;">米国編</span>
+    </div>
+    <div style="font-size:0.68em;color:#555;margin-bottom:6px;">※過去20年間で株価が大きく動いた主な銘柄例（日米）</div>
+    <div style="display:flex;gap:8px;">
+      <!-- 日本編 -->
+      <div style="flex:1;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.68em;">
+          <thead>
+            <tr><td colspan="3" style="background:#cc0000;color:#fff;text-align:center;padding:4px;font-weight:700;">日本編</td></tr>
+            <tr style="background:#8b0000;color:#fff;">
+              <th style="padding:3px 4px;text-align:left;font-weight:700;">銘柄名</th>
+              <th style="padding:3px 4px;text-align:right;font-weight:700;">現在の評価額</th>
+              <th style="padding:3px 4px;text-align:right;font-weight:700;">倍率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:#f9e8e8;"><td style="padding:2px 4px;">レーザーテック</td><td style="padding:2px 4px;text-align:right;">1億5,617万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">115倍</td></tr>
+            <tr style="background:#fff;"><td style="padding:2px 4px;">神戸物産</td><td style="padding:2px 4px;text-align:right;">6,205万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">62倍</td></tr>
+            <tr style="background:#f9e8e8;"><td style="padding:2px 4px;">MonotaRO</td><td style="padding:2px 4px;text-align:right;">4,259万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">42倍</td></tr>
+            <tr style="background:#fff;"><td style="padding:2px 4px;">GMO PG</td><td style="padding:2px 4px;text-align:right;">3,902万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">39倍</td></tr>
+            <tr style="background:#f9e8e8;"><td style="padding:2px 4px;">日本M&amp;Aセンター</td><td style="padding:2px 4px;text-align:right;">3,647万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">36倍</td></tr>
+            <tr style="background:#fff;"><td style="padding:2px 4px;">エムスリー</td><td style="padding:2px 4px;text-align:right;">2,454万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">24倍</td></tr>
+            <tr style="background:#f9e8e8;"><td style="padding:2px 4px;">ダイフク</td><td style="padding:2px 4px;text-align:right;">2,286万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">22倍</td></tr>
+            <tr style="background:#fff;"><td style="padding:2px 4px;">ワークマン</td><td style="padding:2px 4px;text-align:right;">1,565万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">15倍</td></tr>
+            <tr style="background:#f9e8e8;"><td style="padding:2px 4px;">キーエンス</td><td style="padding:2px 4px;text-align:right;">1,356万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">13倍</td></tr>
+            <tr style="background:#fff;"><td style="padding:2px 4px;">東京エレクトロン</td><td style="padding:2px 4px;text-align:right;">1,223万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">12倍</td></tr>
+            <tr style="background:#f9e8e8;"><td style="padding:2px 4px;">ダイキン工業</td><td style="padding:2px 4px;text-align:right;">1,140万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">11倍</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- 米国株 -->
+      <div style="flex:1;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.68em;">
+          <thead>
+            <tr><td colspan="3" style="background:#cc0000;color:#fff;text-align:center;padding:4px;font-weight:700;">米国株</td></tr>
+            <tr style="background:#8b0000;color:#fff;">
+              <th style="padding:3px 4px;text-align:left;font-weight:700;">銘柄名</th>
+              <th style="padding:3px 4px;text-align:right;font-weight:700;">現在の評価額</th>
+              <th style="padding:3px 4px;text-align:right;font-weight:700;">倍率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:#f9e8e8;"><td style="padding:2px 4px;">NVIDIA</td><td style="padding:2px 4px;text-align:right;">2億0,000万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">200倍</td></tr>
+            <tr style="background:#fff;"><td style="padding:2px 4px;">テスラ</td><td style="padding:2px 4px;text-align:right;">1億5,000万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">150倍</td></tr>
+            <tr style="background:#f9e8e8;"><td style="padding:2px 4px;">アマゾン</td><td style="padding:2px 4px;text-align:right;">8,000万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">80倍</td></tr>
+            <tr style="background:#fff;"><td style="padding:2px 4px;">アップル</td><td style="padding:2px 4px;text-align:right;">6,000万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">60倍</td></tr>
+            <tr style="background:#f9e8e8;"><td style="padding:2px 4px;">マイクロソフト</td><td style="padding:2px 4px;text-align:right;">5,000万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">50倍</td></tr>
+            <tr style="background:#fff;"><td style="padding:2px 4px;">メタ・プラットフォームズ</td><td style="padding:2px 4px;text-align:right;">4,000万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">40倍</td></tr>
+            <tr style="background:#f9e8e8;"><td style="padding:2px 4px;">アドビ</td><td style="padding:2px 4px;text-align:right;">3,500万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">35倍</td></tr>
+            <tr style="background:#fff;"><td style="padding:2px 4px;">ブロードコム</td><td style="padding:2px 4px;text-align:right;">3,000万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">30倍</td></tr>
+            <tr style="background:#f9e8e8;"><td style="padding:2px 4px;">コストコ</td><td style="padding:2px 4px;text-align:right;">2,500万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">25倍</td></tr>
+            <tr style="background:#fff;"><td style="padding:2px 4px;">マスターカード</td><td style="padding:2px 4px;text-align:right;">2,000万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">20倍</td></tr>
+            <tr style="background:#f9e8e8;"><td style="padding:2px 4px;">ビザ</td><td style="padding:2px 4px;text-align:right;">1,800万円</td><td style="padding:2px 4px;text-align:right;font-weight:700;color:#cc0000;">18倍</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>`,
+        talk: "また、長期的に伸びていく事を見込んで仕込んでおくという方法も効果的です。\nその最たる例がこちらの表になるのですが、例えば左上にあるレーザーテックという会社は何の会社かご存知でしょうか？\n\nこの会社は日本を代表する半導体企業になります。\n仮にですが、○○さんが10年前に半導体のマーケットが伸びそうだからという理由でレーザーテック社の株を100万円購入していたと仮定して保有していた場合、100万→1億5千万になっているという計算になります。\n\nなので、世の中のお金落ちは個別株をやっている方が非常に多いのです。\n伸びそうな会社にお金を投資するだけで、その会社で働いている優秀な人達が勝手に業績を伸ばして株価を上げてくれるので、勝手にお金を増やしてくれるという構造だからです。\n\n結局、労働収入だけでは限界があるのは分かりきっていますからね。\n万が一、自分の体に何かあって倒れたら収入が0になりゲームオーバーですが、万が一に備えて労働収入以外の部分で収入を得れる構造を作り上げておく事によって、万が一の状況が起こった時にもお金の心配は生まれなくなりますからね。"
+      },
+      {
+        page: "P.11",
+        title: "貧困率（年代別）",
+        customHtml: `
+<div class="sv-wrap" style="background:#fff;min-height:420px;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <!-- Header -->
+  <div style="padding:10px 14px 2px;text-align:center;">
+    <div style="font-size:1.25em;font-weight:700;color:#1a237e;letter-spacing:0.02em;">貧困率（年代別）</div>
+    <div style="font-size:0.72em;color:#666;margin-bottom:4px;">老後の生活リスクを示すデータ</div>
+    <div style="border-bottom:1px solid #ccc;margin-bottom:6px;"></div>
+  </div>
+  <div style="display:flex;gap:8px;padding:0 10px 6px;">
+    <!-- Left: Chart -->
+    <div style="flex:1.6;">
+      <!-- Legend -->
+      <div style="display:flex;gap:12px;margin-bottom:4px;font-size:0.7em;">
+        <span style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:18px;height:2px;background:#cc2200;vertical-align:middle;"></span>●<span style="color:#cc2200;font-weight:700;">男性</span></span>
+        <span style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:18px;height:2px;background:#1a56c4;vertical-align:middle;"></span>●<span style="color:#1a56c4;font-weight:700;">女性</span></span>
+      </div>
+      <svg viewBox="0 0 320 180" style="width:100%;height:auto;">
+        <!-- Background shading for 70+ -->
+        <rect x="230" y="0" width="90" height="155" fill="#f5d0d0" opacity="0.5"/>
+        <!-- Y-axis labels -->
+        <text x="0" y="10" font-size="8" fill="#555">32%</text>
+        <text x="0" y="48" font-size="8" fill="#555">24%</text>
+        <text x="0" y="86" font-size="8" fill="#555">16%</text>
+        <text x="0" y="124" font-size="8" fill="#555">8%</text>
+        <text x="0" y="156" font-size="8" fill="#555">0%</text>
+        <!-- Grid lines -->
+        <line x1="22" y1="6" x2="320" y2="6" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="22" y1="44" x2="320" y2="44" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="22" y1="82" x2="320" y2="82" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="22" y1="120" x2="320" y2="120" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="22" y1="155" x2="320" y2="155" stroke="#ccc" stroke-width="1"/>
+        <!-- X axis -->
+        <line x1="22" y1="0" x2="22" y2="155" stroke="#ccc" stroke-width="1"/>
+        <!-- 70歳以上で急増 badge -->
+        <rect x="228" y="0" width="60" height="14" rx="3" fill="#cc0000"/>
+        <text x="258" y="10" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">70歳以上で急増</text>
+        <!-- Men line (red): values mapped to y coords (155 = 0%, 6 = 32%, so 1% = 4.65px) -->
+        <!-- Ages: 20-24:15.8, 25-29:11.3, 30-34:12.2, 35-39:12.8, 40-44:11.6, 45-49:12.8, 50-54:16.3, 55-59:16.7, 60-64:18.9, 65-69:26.6, 70-74:25.7, 75-79→28.1 -->
+        <polyline points="32,82 52,103 72,98 92,95 112,101 132,95 152,79 172,77 192,68 212,32 242,38 300,24"
+          fill="none" stroke="#cc2200" stroke-width="2" stroke-linejoin="round"/>
+        <!-- Data labels men -->
+        <text x="32" y="94" font-size="6.5" text-anchor="middle" fill="#cc2200">15.8</text>
+        <text x="72" y="110" font-size="6.5" text-anchor="middle" fill="#cc2200">12.2</text>
+        <text x="152" y="91" font-size="6.5" text-anchor="middle" fill="#cc2200">16.3</text>
+        <text x="192" y="80" font-size="6.5" text-anchor="middle" fill="#cc2200">18.9</text>
+        <text x="212" y="44" font-size="6.5" text-anchor="middle" fill="#cc2200">26.6</text>
+        <text x="242" y="50" font-size="6.5" text-anchor="middle" fill="#cc2200">25.7</text>
+        <text x="300" y="36" font-size="6.5" text-anchor="middle" fill="#cc2200">28.1</text>
+        <!-- Women line (blue): 20-24:20.5, 25-29:11.7, 30-34:10.2, 35-39:11.3, 40-44:10.8, 45-49:10.8, 50-54:14.4, 55-59:15.1, 60-64:15.4, 65-69:17.3, 70-74:19.9, 75+:22.9 -->
+        <polyline points="32,60 52,101 72,108 92,103 112,105 132,105 152,88 172,85 192,83 212,75 242,62 300,49"
+          fill="none" stroke="#1a56c4" stroke-width="2" stroke-linejoin="round"/>
+        <!-- Data labels women -->
+        <text x="32" y="72" font-size="6.5" text-anchor="middle" fill="#1a56c4">20.5</text>
+        <text x="52" y="113" font-size="6.5" text-anchor="middle" fill="#1a56c4">11.7</text>
+        <text x="152" y="100" font-size="6.5" text-anchor="middle" fill="#1a56c4">14.4</text>
+        <text x="212" y="87" font-size="6.5" text-anchor="middle" fill="#1a56c4">17.3</text>
+        <text x="242" y="74" font-size="6.5" text-anchor="middle" fill="#1a56c4">19.9</text>
+        <text x="300" y="61" font-size="6.5" text-anchor="middle" fill="#1a56c4">22.9</text>
+        <!-- X-axis labels -->
+        <text x="32" y="165" font-size="6" text-anchor="middle" fill="#555">20-24</text>
+        <text x="52" y="165" font-size="6" text-anchor="middle" fill="#555">25-29</text>
+        <text x="72" y="165" font-size="6" text-anchor="middle" fill="#555">30-34</text>
+        <text x="92" y="165" font-size="6" text-anchor="middle" fill="#555">35-39</text>
+        <text x="112" y="165" font-size="6" text-anchor="middle" fill="#555">40-44</text>
+        <text x="132" y="165" font-size="6" text-anchor="middle" fill="#555">45-49</text>
+        <text x="152" y="165" font-size="6" text-anchor="middle" fill="#555">50-54</text>
+        <text x="172" y="165" font-size="6" text-anchor="middle" fill="#555">55-59</text>
+        <text x="192" y="165" font-size="6" text-anchor="middle" fill="#555">60-64</text>
+        <text x="212" y="165" font-size="6" text-anchor="middle" fill="#555">65-69</text>
+        <text x="242" y="165" font-size="6" text-anchor="middle" fill="#555">70-74</text>
+        <text x="280" y="165" font-size="6" text-anchor="middle" fill="#555">75-79</text>
+        <text x="308" y="165" font-size="6" text-anchor="middle" fill="#555">80以上</text>
+      </svg>
+    </div>
+    <!-- Right: Info box -->
+    <div style="flex:1;border:2px solid #3a6bc4;border-radius:8px;padding:8px;background:#eef3fc;">
+      <div style="font-size:0.82em;font-weight:700;color:#1a237e;margin-bottom:6px;">65歳以降に<br>貧困率が急上昇</div>
+      <div style="border:2px solid #cc0000;border-radius:6px;padding:6px;background:#fff;margin-bottom:8px;">
+        <div style="font-size:0.7em;font-weight:700;color:#cc0000;margin-bottom:2px;">⚠ 70歳以上の貧困率</div>
+        <div style="font-size:0.78em;color:#333;">男性 <span style="font-size:1.4em;font-weight:700;color:#cc0000;">28.1%</span></div>
+        <div style="font-size:0.78em;color:#333;">女性 <span style="font-size:1.4em;font-weight:700;color:#1a56c4;">22.9%</span></div>
+      </div>
+      <div style="font-size:0.68em;color:#333;margin-bottom:5px;">
+        <span style="color:#1a237e;">●</span> <strong>高齢になるほどリスク増加</strong><br>
+        <span style="padding-left:10px;">特に70歳以降は男女ともに急上昇。</span>
+      </div>
+      <div style="font-size:0.68em;color:#333;">
+        <span style="color:#1a56c4;">●</span> <strong>現役世代からの備えが必須</strong><br>
+        <span style="padding-left:10px;">iDeCo・NISAで長期資産形成を。</span>
+      </div>
+    </div>
+  </div>
+  <!-- POINT bar -->
+  <div style="display:flex;align-items:stretch;margin:0 10px 8px;">
+    <div style="background:#cc0000;color:#fff;font-size:0.75em;font-weight:700;padding:6px 10px;border-radius:4px 0 0 4px;display:flex;align-items:center;">POINT</div>
+    <div style="background:#f5f5f5;border:1px solid #ddd;font-size:0.68em;color:#333;padding:6px 8px;border-radius:0 4px 4px 0;line-height:1.5;">70歳以降で貧困率が急増（男性28.1%・女性22.9%）。65歳以前の現役期からiDeCo・新NISAを活用した長期資産形成で、老後の経済的安心を確保しましょう。</div>
+  </div>
+</div>`,
+        talk: "そもそも、あき先生とHorizonが連携して情報発信や相談会等を真剣に向き合うようになった背景としては、政治家が義務教育で金融リテラシーをカリキュラム化しなかった事により、高齢化が進むほど貧困率が高まってしまうという構造になってしまったからです。\n\nそもそも、今回の相談会の内容は我々民間企業がやる事でなく国がやるべき内容なんですよね・・・。\nただ、国がそのような機会を全く提供する様子がないので１人でも多くの方に投資の重要視を考えてもらう場を儲けさせていただいているという事です。"
+      },
+      {
+        page: "P.12",
+        title: "年金受給額の推移（2000年〜2021年）",
+        customHtml: `
+<div class="sv-wrap" style="background:#fff;min-height:380px;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <!-- Header -->
+  <div style="padding:10px 14px 2px;text-align:center;">
+    <div style="font-size:1.15em;font-weight:700;color:#1a237e;letter-spacing:0.02em;">年金受給額の推移（2000年〜2021年）</div>
+    <div style="font-size:0.72em;color:#888;margin-bottom:6px;letter-spacing:0.02em;">公的年金だけに頼れない時代 ー 資産形成の重要性</div>
+    <div style="border-bottom:1px solid #ddd;"></div>
+  </div>
+  <div style="display:flex;gap:10px;padding:8px 12px;">
+    <!-- Left: Chart -->
+    <div style="flex:1.2;">
+      <div style="font-size:0.65em;color:#555;margin-bottom:2px;">年金受給額（万円）</div>
+      <svg viewBox="0 0 240 180" style="width:100%;height:auto;">
+        <!-- Grid lines -->
+        <line x1="30" y1="10" x2="220" y2="10" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="30" y1="40" x2="220" y2="40" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="30" y1="70" x2="220" y2="70" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="30" y1="100" x2="220" y2="100" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="30" y1="130" x2="220" y2="130" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="30" y1="155" x2="220" y2="155" stroke="#bbb" stroke-width="1"/>
+        <line x1="30" y1="10" x2="30" y2="155" stroke="#bbb" stroke-width="1"/>
+        <!-- Y labels -->
+        <text x="25" y="13" text-anchor="end" font-size="8" fill="#555">18</text>
+        <text x="25" y="43" text-anchor="end" font-size="8" fill="#555">17</text>
+        <text x="25" y="73" text-anchor="end" font-size="8" fill="#555">16</text>
+        <text x="25" y="103" text-anchor="end" font-size="8" fill="#555">15</text>
+        <text x="25" y="133" text-anchor="end" font-size="8" fill="#555">14</text>
+        <text x="25" y="158" text-anchor="end" font-size="8" fill="#555">12 (※13)</text>
+        <!-- Area fill (pink) -->
+        <!-- Points: 2000(x=50,y≈16), 2010(x=110,y≈46), 2020(x=170,y≈76), 2021(x=200,y≈121) -->
+        <!-- y mapping: 18=10, 14=130, each万=30px -->
+        <!-- 17.7 → 10+(18-17.7)*30=10+9=19 -->
+        <!-- 16.5 → 10+(18-16.5)*30=10+45=55 -->
+        <!-- 15.1 → 10+(18-15.1)*30=10+87=97 -->
+        <!-- 14.4 → 10+(18-14.4)*30=10+108=118 -->
+        <polygon points="50,19 110,55 170,97 200,118 200,155 50,155" fill="#f5c0c0" opacity="0.6"/>
+        <polyline points="50,19 110,55 170,97 200,118" fill="none" stroke="#cc2200" stroke-width="2.5" stroke-linejoin="round"/>
+        <!-- Data points -->
+        <circle cx="50" cy="19" r="4" fill="#cc2200"/>
+        <circle cx="110" cy="55" r="4" fill="#cc2200"/>
+        <circle cx="170" cy="97" r="4" fill="#cc2200"/>
+        <circle cx="200" cy="118" r="4" fill="#cc2200"/>
+        <!-- Data labels -->
+        <text x="50" y="14" text-anchor="middle" font-size="8" fill="#cc2200" font-weight="700">約17.7万円</text>
+        <text x="110" y="50" text-anchor="middle" font-size="8" fill="#333">16.5万</text>
+        <text x="170" y="92" text-anchor="middle" font-size="8" fill="#333">15.1万</text>
+        <text x="200" y="113" text-anchor="end" font-size="8" fill="#cc2200" font-weight="700">約14.4万円</text>
+        <!-- X labels -->
+        <text x="50" y="168" text-anchor="middle" font-size="9" fill="#555">2000</text>
+        <text x="110" y="168" text-anchor="middle" font-size="9" fill="#555">2010</text>
+        <text x="170" y="168" text-anchor="middle" font-size="9" fill="#555">2020</text>
+        <text x="200" y="168" text-anchor="middle" font-size="9" fill="#555">2021</text>
+      </svg>
+    </div>
+    <!-- Right: Info boxes -->
+    <div style="flex:1;display:flex;flex-direction:column;gap:10px;justify-content:center;">
+      <div style="background:#f0f0f0;border-radius:8px;padding:12px 14px;">
+        <div style="font-size:0.95em;font-weight:700;color:#cc2200;margin-bottom:4px;">約20年で約3万円減少</div>
+        <div style="font-size:0.72em;color:#444;">2000年頃 約17.7万円 → 2021年 約14.4万円</div>
+      </div>
+      <div style="background:#f0f0f0;border-radius:8px;padding:12px 14px;">
+        <div style="font-size:0.95em;font-weight:700;color:#1a56c4;margin-bottom:4px;">私的資産形成が不可欠</div>
+        <div style="font-size:0.72em;color:#444;">老後資金は公的年金＋自助で設計</div>
+      </div>
+    </div>
+  </div>
+</div>`,
+        talk: "失われた30年と揶揄されていますが、バブルが弾けて日本はどうなったと言うと物価の上昇に加えて少子高齢化が進み、貰える年金受給額も年々減少していますよね？"
+      },
+      {
+        page: "P.13",
+        title: "消費税（国別）",
+        customHtml: `
+<div class="sv-wrap" style="background:#fff;min-height:400px;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <div style="padding:10px 14px 4px;text-align:center;">
+    <div style="font-size:1.15em;font-weight:700;color:#1a237e;letter-spacing:0.02em;">消費税（国別）</div>
+  </div>
+  <!-- Chart area -->
+  <div style="padding:4px 10px 0;">
+    <svg viewBox="0 0 560 200" style="width:100%;height:auto;">
+      <!-- Grid lines & Y labels -->
+      <text x="18" y="12" text-anchor="end" font-size="8" fill="#555">30%</text>
+      <text x="18" y="42" text-anchor="end" font-size="8" fill="#555">25%</text>
+      <text x="18" y="72" text-anchor="end" font-size="8" fill="#555">20%</text>
+      <text x="18" y="102" text-anchor="end" font-size="8" fill="#555">15%</text>
+      <text x="18" y="132" text-anchor="end" font-size="8" fill="#555">10%</text>
+      <text x="18" y="162" text-anchor="end" font-size="8" fill="#555">5%</text>
+      <text x="18" y="178" text-anchor="end" font-size="8" fill="#555">0%</text>
+      <line x1="20" y1="8" x2="558" y2="8" stroke="#e8e8e8" stroke-width="0.5"/>
+      <line x1="20" y1="38" x2="558" y2="38" stroke="#e8e8e8" stroke-width="0.5"/>
+      <line x1="20" y1="68" x2="558" y2="68" stroke="#e8e8e8" stroke-width="0.5"/>
+      <line x1="20" y1="98" x2="558" y2="98" stroke="#e8e8e8" stroke-width="0.5"/>
+      <line x1="20" y1="128" x2="558" y2="128" stroke="#e8e8e8" stroke-width="0.5"/>
+      <line x1="20" y1="158" x2="558" y2="158" stroke="#e8e8e8" stroke-width="0.5"/>
+      <line x1="20" y1="178" x2="558" y2="178" stroke="#bbb" stroke-width="1"/>
+      <!-- Y-axis 0% line -->
+      <!-- Bars: y = 178 - (val/30)*170, height=(val/30)*170 -->
+      <!-- デンマーク 26% -->
+      <rect x="22" y="31" width="22" height="147" fill="#6aaee0"/>
+      <!-- フランス 25% -->
+      <rect x="47" y="37" width="22" height="141" fill="#6aaee0"/>
+      <!-- ドイツ 24% -->
+      <rect x="72" y="42" width="22" height="136" fill="#6aaee0"/>
+      <!-- オランダ 23% -->
+      <rect x="97" y="48" width="22" height="130" fill="#6aaee0"/>
+      <!-- スウェーデン 23% -->
+      <rect x="122" y="48" width="22" height="130" fill="#6aaee0"/>
+      <!-- ノルウェー 22% -->
+      <rect x="147" y="53" width="22" height="125" fill="#6aaee0"/>
+      <!-- ベルギー 21% -->
+      <rect x="172" y="59" width="22" height="119" fill="#6aaee0"/>
+      <!-- オーストリア 20% -->
+      <rect x="197" y="65" width="22" height="113" fill="#6aaee0"/>
+      <!-- イタリア 19% -->
+      <rect x="222" y="70" width="22" height="108" fill="#6aaee0"/>
+      <!-- イギリス 18% -->
+      <rect x="247" y="76" width="22" height="102" fill="#6aaee0"/>
+      <!-- 韓国 16% -->
+      <rect x="272" y="87" width="22" height="91" fill="#6aaee0"/>
+      <!-- インドネシア 16% -->
+      <rect x="297" y="87" width="22" height="91" fill="#6aaee0"/>
+      <!-- 台湾 14% -->
+      <rect x="322" y="99" width="22" height="79" fill="#6aaee0"/>
+      <!-- ニュージーランド 11% -->
+      <rect x="347" y="115" width="22" height="63" fill="#6aaee0"/>
+      <!-- フィリピン 10% -->
+      <rect x="372" y="121" width="22" height="57" fill="#6aaee0"/>
+      <!-- 日本 10% RED -->
+      <rect x="397" y="121" width="22" height="57" fill="#cc2200"/>
+      <text x="408" y="117" text-anchor="middle" font-size="9" fill="#cc2200" font-weight="700">10%</text>
+      <!-- カナダ 9% -->
+      <rect x="422" y="127" width="22" height="51" fill="#6aaee0"/>
+      <!-- タイ 8% -->
+      <rect x="447" y="132" width="22" height="46" fill="#6aaee0"/>
+      <!-- 中国 4% -->
+      <rect x="472" y="155" width="22" height="23" fill="#6aaee0"/>
+      <!-- シンガポール 1% -->
+      <rect x="497" y="172" width="22" height="6" fill="#6aaee0"/>
+      <!-- X labels (rotated) -->
+      <text transform="rotate(-45,33,188)" x="33" y="188" font-size="7" fill="#555" text-anchor="end">デンマーク</text>
+      <text transform="rotate(-45,58,188)" x="58" y="188" font-size="7" fill="#555" text-anchor="end">フランス</text>
+      <text transform="rotate(-45,83,188)" x="83" y="188" font-size="7" fill="#555" text-anchor="end">ドイツ</text>
+      <text transform="rotate(-45,108,188)" x="108" y="188" font-size="7" fill="#555" text-anchor="end">オランダ</text>
+      <text transform="rotate(-45,133,188)" x="133" y="188" font-size="7" fill="#555" text-anchor="end">スウェーデン</text>
+      <text transform="rotate(-45,158,188)" x="158" y="188" font-size="7" fill="#555" text-anchor="end">ノルウェー</text>
+      <text transform="rotate(-45,183,188)" x="183" y="188" font-size="7" fill="#555" text-anchor="end">ベルギー</text>
+      <text transform="rotate(-45,208,188)" x="208" y="188" font-size="7" fill="#555" text-anchor="end">オーストリア</text>
+      <text transform="rotate(-45,233,188)" x="233" y="188" font-size="7" fill="#555" text-anchor="end">イタリア</text>
+      <text transform="rotate(-45,258,188)" x="258" y="188" font-size="7" fill="#555" text-anchor="end">イギリス</text>
+      <text transform="rotate(-45,283,188)" x="283" y="188" font-size="7" fill="#555" text-anchor="end">韓国</text>
+      <text transform="rotate(-45,308,188)" x="308" y="188" font-size="7" fill="#555" text-anchor="end">インドネシア</text>
+      <text transform="rotate(-45,333,188)" x="333" y="188" font-size="7" fill="#555" text-anchor="end">台湾</text>
+      <text transform="rotate(-45,358,188)" x="358" y="188" font-size="7" fill="#555" text-anchor="end">ニュージーランド</text>
+      <text transform="rotate(-45,383,188)" x="383" y="188" font-size="7" fill="#555" text-anchor="end">フィリピン</text>
+      <text transform="rotate(-45,408,188)" x="408" y="188" font-size="7" fill="#cc2200" font-weight="700" text-anchor="end">日本</text>
+      <text transform="rotate(-45,433,188)" x="433" y="188" font-size="7" fill="#555" text-anchor="end">カナダ</text>
+      <text transform="rotate(-45,458,188)" x="458" y="188" font-size="7" fill="#555" text-anchor="end">タイ</text>
+      <text transform="rotate(-45,483,188)" x="483" y="188" font-size="7" fill="#555" text-anchor="end">中国</text>
+      <text transform="rotate(-45,508,188)" x="508" y="188" font-size="7" fill="#555" text-anchor="end">シンガポール</text>
+    </svg>
+  </div>
+  <!-- POINT -->
+  <div style="margin:4px 10px 8px;background:#f5f5f5;border-radius:6px;padding:8px 10px;font-size:0.68em;color:#333;line-height:1.6;">
+    <span style="color:#cc2200;font-weight:700;">POINT　</span>
+    日本の消費税10%は欧州・北欧諸国と比べ依然として最低水準。欧州はすでに20〜25%が標準。少子高齢化による社会保障費の増大を考えると、将来的な増税リスクは極めて高い。今のうちに税制優遇を活用した資産形成を進めることが、長期的な資産防衛につながる。
+  </div>
+</div>`,
+        talk: "また、30年前は消費税が3%という時代もありましたが謎に今は10%ですよね？\n\n【失われた30年】と言われていますが、この30年間で何が起きたかというと円の価値がめちゃくちゃ落ちてしまったのです。\n\n現代社会の年収1000万と、昔の年収500万では生活水準が同じと言われているのも頷けますよね。"
+      },
+      {
+        page: "P.14",
+        title: "老後破産の割合（年代別）",
+        customHtml: `
+<div class="sv-wrap" style="background:#fff;min-height:400px;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <div style="padding:8px 14px 2px;text-align:center;">
+    <div style="font-size:1.15em;font-weight:700;color:#1a237e;">老後破産の割合（年代別）</div>
+    <div style="font-size:0.7em;color:#888;margin-bottom:4px;">年齢とともに急増する経済破綻リスク</div>
+    <div style="border-bottom:1px solid #ddd;"></div>
+  </div>
+  <div style="display:flex;gap:8px;padding:6px 10px;">
+    <!-- Left: Chart -->
+    <div style="flex:1.5;">
+      <svg viewBox="0 0 300 190" style="width:100%;height:auto;">
+        <!-- Shaded background for 80+ -->
+        <rect x="174" y="0" width="124" height="165" fill="#f5d0d0" opacity="0.4"/>
+        <!-- Grid lines -->
+        <line x1="20" y1="8" x2="298" y2="8" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="20" y1="32" x2="298" y2="32" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="20" y1="56" x2="298" y2="56" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="20" y1="80" x2="298" y2="80" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="20" y1="104" x2="298" y2="104" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="20" y1="128" x2="298" y2="128" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="20" y1="152" x2="298" y2="152" stroke="#e0e0e0" stroke-width="0.5"/>
+        <line x1="20" y1="165" x2="298" y2="165" stroke="#bbb" stroke-width="1"/>
+        <line x1="20" y1="0" x2="20" y2="165" stroke="#bbb" stroke-width="1"/>
+        <!-- Y labels: 35%=8, 0%=165, each 5%=22.4px -->
+        <text x="16" y="11" text-anchor="end" font-size="7.5" fill="#555">35%</text>
+        <text x="16" y="35" text-anchor="end" font-size="7.5" fill="#555">30%</text>
+        <text x="16" y="59" text-anchor="end" font-size="7.5" fill="#555">25%</text>
+        <text x="16" y="83" text-anchor="end" font-size="7.5" fill="#555">20%</text>
+        <text x="16" y="107" text-anchor="end" font-size="7.5" fill="#555">15%</text>
+        <text x="16" y="131" text-anchor="end" font-size="7.5" fill="#555">10%</text>
+        <text x="16" y="155" text-anchor="end" font-size="7.5" fill="#555">5%</text>
+        <!-- 80歳以上で急増 badge -->
+        <rect x="173" y="0" width="80" height="13" rx="3" fill="#cc0000"/>
+        <text x="213" y="9.5" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">▲ 80歳以上で急増！</text>
+        <!-- Bars: y = 165 - (val/35)*165 -->
+        <!-- 60-64 6.8%: h=32 -->
+        <rect x="26" y="133" width="30" height="32" fill="#6a9fd4"/>
+        <text x="41" y="129" text-anchor="middle" font-size="8" fill="#444" font-weight="600">6.8</text>
+        <!-- 65-69 9.4%: h=44 -->
+        <rect x="62" y="121" width="30" height="44" fill="#b08060"/>
+        <text x="77" y="117" text-anchor="middle" font-size="8" fill="#444" font-weight="600">9.4</text>
+        <!-- 70-74 13.2%: h=62 -->
+        <rect x="98" y="103" width="30" height="62" fill="#e07030"/>
+        <text x="113" y="99" text-anchor="middle" font-size="8" fill="#444" font-weight="600">13.2</text>
+        <!-- 75-79 18.7%: h=88 -->
+        <rect x="134" y="77" width="30" height="88" fill="#cc2200"/>
+        <text x="149" y="73" text-anchor="middle" font-size="8" fill="#444" font-weight="600">18.7</text>
+        <!-- 80-84 24.3%: h=115 -->
+        <rect x="178" y="50" width="30" height="115" fill="#991100"/>
+        <text x="193" y="46" text-anchor="middle" font-size="8.5" fill="#333" font-weight="700">24.3</text>
+        <!-- 85以上 29.8%: h=141 -->
+        <rect x="220" y="24" width="30" height="141" fill="#6d0a0a"/>
+        <text x="235" y="20" text-anchor="middle" font-size="8.5" fill="#333" font-weight="700">29.8</text>
+        <!-- X labels -->
+        <text x="41" y="175" text-anchor="middle" font-size="7" fill="#555">60-64歳</text>
+        <text x="77" y="175" text-anchor="middle" font-size="7" fill="#555">65-69歳</text>
+        <text x="113" y="175" text-anchor="middle" font-size="7" fill="#555">70-74歳</text>
+        <text x="149" y="175" text-anchor="middle" font-size="7" fill="#555">75-79歳</text>
+        <text x="193" y="175" text-anchor="middle" font-size="7" fill="#555">80-84歳</text>
+        <text x="235" y="175" text-anchor="middle" font-size="7" fill="#555">85歳以上</text>
+      </svg>
+    </div>
+    <!-- Right: Info box -->
+    <div style="flex:1;border:2px solid #3a6bc4;border-radius:8px;padding:8px;background:#eef3fc;">
+      <div style="font-size:0.82em;font-weight:700;color:#1a237e;margin-bottom:6px;">高齢になるほど<br>破産リスクが急増</div>
+      <div style="border:2px solid #cc0000;border-radius:6px;padding:6px 8px;background:#fff;margin-bottom:8px;">
+        <div style="font-size:0.68em;font-weight:700;color:#cc0000;margin-bottom:2px;">⚠ 85歳以上の破産リスク</div>
+        <div style="font-size:0.7em;color:#333;margin-bottom:2px;">約3人に1人が該当</div>
+        <div style="font-size:1.4em;font-weight:700;color:#cc0000;">29.8%</div>
+      </div>
+      <div style="font-size:0.67em;color:#333;margin-bottom:5px;">
+        <span style="color:#1a237e;">●</span> <strong>年金だけでは生活費が不足</strong><br>
+        <span style="padding-left:10px;">毎月約5万円の赤字が続くケースも。</span>
+      </div>
+      <div style="font-size:0.67em;color:#333;">
+        <span style="color:#1a56c4;">●</span> <strong>現役世代からの備えが必須</strong><br>
+        <span style="padding-left:10px;">iDeCo・NISAで長期資産形成を。</span>
+      </div>
+    </div>
+  </div>
+  <!-- POINT -->
+  <div style="display:flex;align-items:stretch;margin:0 10px 8px;">
+    <div style="background:#cc0000;color:#fff;font-size:0.72em;font-weight:700;padding:6px 8px;border-radius:4px 0 0 4px;display:flex;align-items:center;white-space:nowrap;">POINT</div>
+    <div style="background:#f5f5f5;border:1px solid #ddd;font-size:0.66em;color:#333;padding:6px 8px;border-radius:0 4px 4px 0;line-height:1.5;">60歳以降の老後破産リスクは年齢とともに急増し、85歳以上では約3人に1人（29.8%）が経済破綻の危機に直面。現役期からiDeCo・新NISAを活用した長期資産形成が、老後の安心を守る最大の対策です。</div>
+  </div>
+</div>`,
+        talk: "ただ、今の時代は昔と比較すると恵まれている点もあります。\nそれは、ネットが発達したのでオンラインで投資を学びたいと思ったら今回のようにオンラインで相談会に来ることも可能になりました。昔はオンラインで学ぶ機会自体も希少でしたからね。\n\nそのため、学ぶ機会の損失により最も影響を受けているのが80歳以上の方になります。\n85歳以上の方の破産リスク割合が約30%という実態となっており、約3人に1人が老後破産レベルというのが現代日本の実態となります。\nこのような実態を作ってしまったのは、政治家の責任だと思っています。"
+      },
+      {
+        page: "P.15",
+        title: "現在の資産運用状況は？（学習方法）",
+        customHtml: `
+<div class="sv-wrap" style="background:#e8eef0;min-height:380px;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <div style="background:#2a8080;color:#fff;font-size:1.2em;font-weight:700;text-align:center;padding:14px 10px;letter-spacing:0.05em;">現在の資産運用状況は？</div>
+  <div style="padding:14px 20px;">
+    <!-- Section 1 -->
+    <div style="margin-bottom:16px;">
+      <div style="font-size:0.95em;font-weight:700;color:#111;margin-bottom:8px;">
+        ①<span style="background:#00e000;padding:1px 6px;border-radius:2px;">無リスク資産</span>
+        <span style="font-size:0.82em;font-weight:400;">（元本割れの確率が低いもしくは、可能性が0の資産）</span>
+      </div>
+      <div style="font-size:0.88em;color:#111;line-height:2;padding-left:12px;">
+        ・銀行預金：<br>
+        ・貯蓄型保険：<br>
+        ・学資保険：<br>
+        ・iDeCo：<br>
+        ・国債：
+      </div>
+    </div>
+    <!-- Section 2 -->
+    <div>
+      <div style="font-size:0.95em;font-weight:700;color:#111;margin-bottom:8px;">
+        ②<span style="background:#00e000;padding:1px 6px;border-radius:2px;">リスク資産＝お金に働いてもらう資産。</span>
+      </div>
+      <div style="font-size:0.88em;color:#111;line-height:2;padding-left:12px;">
+        ・投資信託(<span style="color:#cc0000;font-weight:700;">株の複合体</span>)：<br>
+        ・<span style="color:#1a56c4;font-weight:700;">株式投資</span>：<br>
+        ・社債：<br>
+        ・不動産：
+      </div>
+    </div>
+  </div>
+</div>`,
+        talk: "そのため、整理すると○○さんの状況よりベストなのは個別株を真剣に勉強した上で5年後、10年後にお金の不安が全くない未来を作る事だと思います。\n\nそして、個別株を学習する方法は具体的に2つあります。\n1つ目は独学で地道に学んでいく事です。\n独学の場合は、自分で株の本を購入したりして学んでいく形になるので4年〜5年程度学べばある程度形にはなって行くかと思います。\n\n2つ目は、プロから教えてもらう方法です。\nこちらのメリットとしては、投資に関して不明点があればプロに教えてもらえるので数ヶ月で株を習得する事が可能になります。\n一方で、独学と比較するとお金はかかります。（両面提示を行い、不信感の払拭を行う。）\n\n相談会に来られる方でも、やはり今まで自力で情報収集してやろうとしたが結局何をすれば良いのか分からず成果を残す事が全くできなかったですという方が非常に多かったので、まずは投資の抜本的な知識を軸に心から安心して投資ができるように、あき先生監修で講座もやらせて頂いており大変ご好評をいただいておりますので、良ければ最後にご説明をさせていただくので『良いな』と思って頂けたら全力でサポートさせて頂きますし、『微妙』だと感じられたら断って頂いて問題ございませんのでご安心いただければと思います。"
+      },
+      {
+        page: "P.16",
+        title: "資産形成マスター講座",
+        customHtml: `
+<div class="sv-wrap" style="background:linear-gradient(135deg,#f5efe0 0%,#ede3ce 40%,#ddd0b8 100%);min-height:360px;position:relative;overflow:hidden;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <!-- Network graphic (right side) -->
+  <svg style="position:absolute;right:0;top:0;width:45%;height:100%;opacity:0.35;" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet">
+    <line x1="200" y1="30" x2="260" y2="80" stroke="#c4a050" stroke-width="1"/>
+    <line x1="260" y1="80" x2="280" y2="160" stroke="#c4a050" stroke-width="1"/>
+    <line x1="280" y1="160" x2="220" y2="220" stroke="#c4a050" stroke-width="1"/>
+    <line x1="220" y1="220" x2="150" y2="260" stroke="#c4a050" stroke-width="1"/>
+    <line x1="150" y1="260" x2="200" y2="30" stroke="#c4a050" stroke-width="0.7"/>
+    <line x1="200" y1="30" x2="280" y2="160" stroke="#c4a050" stroke-width="0.7"/>
+    <line x1="260" y1="80" x2="220" y2="220" stroke="#c4a050" stroke-width="0.7"/>
+    <line x1="280" y1="160" x2="150" y2="260" stroke="#c4a050" stroke-width="0.7"/>
+    <line x1="180" y1="100" x2="260" y2="80" stroke="#c4a050" stroke-width="0.7"/>
+    <line x1="180" y1="100" x2="220" y2="220" stroke="#c4a050" stroke-width="0.7"/>
+    <line x1="180" y1="100" x2="150" y2="260" stroke="#c4a050" stroke-width="0.5"/>
+    <circle cx="200" cy="30" r="5" fill="#c4a050" opacity="0.8"/>
+    <circle cx="260" cy="80" r="4" fill="#c4a050" opacity="0.7"/>
+    <circle cx="280" cy="160" r="5" fill="#c4a050" opacity="0.8"/>
+    <circle cx="220" cy="220" r="4" fill="#c4a050" opacity="0.7"/>
+    <circle cx="150" cy="260" r="5" fill="#c4a050" opacity="0.8"/>
+    <circle cx="180" cy="100" r="3" fill="#9a8060" opacity="0.6"/>
+    <circle cx="240" cy="140" r="3" fill="#9a8060" opacity="0.5"/>
+    <circle cx="190" cy="190" r="3" fill="#9a8060" opacity="0.5"/>
+  </svg>
+  <!-- Content -->
+  <div style="position:relative;z-index:1;padding:22px 28px;">
+    <!-- Banner -->
+    <div style="display:inline-block;background:#1a2c5c;color:#fff;font-size:0.8em;font-weight:700;padding:6px 16px 6px 12px;border-radius:2px 0 0 2px;margin-bottom:18px;position:relative;letter-spacing:0.1em;">
+      オンラインコース
+      <div style="position:absolute;right:-10px;top:0;width:0;height:0;border-top:18px solid transparent;border-bottom:18px solid transparent;border-left:10px solid #1a2c5c;"></div>
+    </div>
+    <!-- Subtitle -->
+    <div style="font-size:0.9em;color:#2a3a6a;font-weight:600;margin-bottom:6px;letter-spacing:0.05em;">投資知識をあなたの資産に</div>
+    <!-- Gold line -->
+    <div style="height:3px;background:linear-gradient(90deg,#c4a050,#e8d090,#c4a050);width:70%;margin-bottom:16px;border-radius:2px;"></div>
+    <!-- 資産形成 boxes -->
+    <div style="display:flex;gap:6px;margin-bottom:8px;">
+      <div style="background:#1a2c5c;border:2px solid #c4a050;padding:8px 12px;border-radius:3px;font-size:1.3em;font-weight:700;color:#fff;letter-spacing:0.05em;">資産形成</div>
+    </div>
+    <!-- マスター講座 boxes -->
+    <div style="display:flex;gap:6px;">
+      <div style="background:#fff;border:2px solid #c4a050;padding:8px 10px;border-radius:3px;font-size:1.5em;font-weight:700;color:#1a2c5c;text-align:center;min-width:44px;">マ</div>
+      <div style="background:#fff;border:2px solid #c4a050;padding:8px 10px;border-radius:3px;font-size:1.5em;font-weight:700;color:#1a2c5c;text-align:center;min-width:44px;">ス</div>
+      <div style="background:#fff;border:2px solid #c4a050;padding:8px 10px;border-radius:3px;font-size:1.5em;font-weight:700;color:#1a2c5c;text-align:center;min-width:44px;">タ</div>
+      <div style="background:#fff;border:2px solid #c4a050;padding:8px 10px;border-radius:3px;font-size:1.5em;font-weight:700;color:#1a2c5c;text-align:center;min-width:44px;">ー</div>
+      <div style="background:#fff;border:2px solid #c4a050;padding:8px 10px;border-radius:3px;font-size:1.5em;font-weight:700;color:#1a2c5c;text-align:center;min-width:44px;">講</div>
+      <div style="background:#fff;border:2px solid #c4a050;padding:8px 10px;border-radius:3px;font-size:1.5em;font-weight:700;color:#1a2c5c;text-align:center;min-width:44px;">座</div>
+    </div>
+  </div>
+</div>`,
+        talk: "それでは、完結に説明をさせていただきます。\nあき先生監修で行っているのがマスター講座になります。\n\n特徴としては、講師とライン交換可能なので何か分からない事があれば投資助言ほうに抵触しない範囲の中で何でもご相談する事が可能となります。\nまた、定期的にZoomでマンツーマンでセッションを受けることが可能なので安心して楽しく学んで頂ける形となっております。"
+      },
+      {
+        page: "P.17",
+        title: "講師のご紹介",
+        customHtml: `
+<div class="sv-wrap" style="background:linear-gradient(135deg,#f5efe0 0%,#ede3ce 50%,#e0d4b8 100%);min-height:320px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans JP',sans-serif;">
+  <!-- Dot pattern left -->
+  <div style="position:absolute;left:0;top:0;width:30%;height:100%;opacity:0.3;background-image:radial-gradient(circle,#c4a050 1px,transparent 1px);background-size:10px 10px;"></div>
+  <!-- Dot pattern bottom -->
+  <div style="position:absolute;left:0;bottom:0;width:50%;height:40%;opacity:0.2;background-image:radial-gradient(circle,#c4a050 1px,transparent 1px);background-size:10px 10px;"></div>
+  <!-- Geometric lines top-right -->
+  <svg style="position:absolute;right:0;top:0;width:25%;height:50%;opacity:0.3;" viewBox="0 0 120 100">
+    <line x1="120" y1="0" x2="60" y2="80" stroke="#c4a050" stroke-width="1"/>
+    <line x1="120" y1="0" x2="90" y2="100" stroke="#c4a050" stroke-width="1"/>
+    <line x1="60" y1="80" x2="90" y2="100" stroke="#c4a050" stroke-width="1"/>
+    <line x1="80" y1="20" x2="60" y2="80" stroke="#c4a050" stroke-width="0.7"/>
+    <line x1="80" y1="20" x2="90" y2="100" stroke="#c4a050" stroke-width="0.7"/>
+  </svg>
+  <!-- Geometric lines bottom-left -->
+  <svg style="position:absolute;left:0;bottom:0;width:20%;height:40%;opacity:0.3;" viewBox="0 0 100 80">
+    <line x1="0" y1="80" x2="60" y2="10" stroke="#c4a050" stroke-width="1"/>
+    <line x1="0" y1="80" x2="80" y2="40" stroke="#c4a050" stroke-width="1"/>
+    <line x1="60" y1="10" x2="80" y2="40" stroke="#c4a050" stroke-width="0.7"/>
+  </svg>
+  <!-- Center content -->
+  <div style="text-align:center;position:relative;z-index:1;padding:20px;">
+    <div style="font-size:2.2em;font-weight:700;color:#1a2c5c;letter-spacing:0.05em;margin-bottom:14px;">講師のご紹介</div>
+    <div style="height:3px;background:linear-gradient(90deg,transparent,#c4a050,#e8d090,#c4a050,transparent);width:80%;margin:0 auto 16px;border-radius:2px;"></div>
+    <div style="font-size:0.9em;color:#2a3a5a;letter-spacing:0.05em;">本セミナーをご担当する講師をご紹介します</div>
+  </div>
+</div>`,
+        talk: "まず、初めに講座の講師陣を簡単に紹介させていただきます。"
+      },
+      {
+        page: "P.18",
+        title: "講師プロフィール：はぎはら ゆきえ",
+        customHtml: `
+<div class="sv-wrap" style="background:#f4f6f8;min-height:380px;position:relative;overflow:hidden;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <div style="position:absolute;left:0;top:0;width:22%;height:100%;background-image:radial-gradient(circle,#bcd0e0 1.5px,transparent 1.5px);background-size:12px 12px;opacity:0.5;"></div>
+  <div style="position:relative;z-index:1;display:flex;gap:14px;padding:16px 16px 10px;">
+    <div style="flex:1.4;">
+      <div style="display:inline-block;background:#2ab0b0;color:#fff;font-size:0.75em;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:8px;letter-spacing:0.05em;">プロフィール</div>
+      <div style="font-size:1.4em;font-weight:700;color:#1a1a2e;letter-spacing:0.08em;margin-bottom:10px;">はぎはら　ゆきえ</div>
+      <div style="font-size:0.75em;color:#333;line-height:2;">
+        ・銀行営業職→独立系FP<br>
+        ・9歳、6歳の２人の娘の子育てに奮闘中<br>
+        ・投資信託、米国ETF、個別株の運用が得意です<br>
+        ・家計管理や資産運用のお手伝いが大好き💕<br>
+        ・複数の投資スクールで講師を務め<br>
+        　　　自身でもスクールを主宰しています♪<br>
+        〜 資格：FP１級／簿記２級／証券外務員１種 〜
+      </div>
+    </div>
+    <div style="flex:0.8;display:flex;align-items:center;justify-content:center;">
+      <div style="width:130px;height:130px;border-radius:50%;border:3px solid #c4a050;background:linear-gradient(135deg,#fce4ec,#e8f5e9,#e3f2fd);display:flex;align-items:center;justify-content:center;font-size:0.7em;color:#888;text-align:center;line-height:1.4;">
+        <div>はぎはら<br>ゆきえ先生</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin:4px 14px 10px;background:#fce4ec;border-radius:10px;padding:10px 14px;font-size:0.72em;color:#333;line-height:1.7;border:1px solid #f8bbd0;">
+    保険や投資信託などの商品販売を前提とした資産運用相談に疑問を感じ、独立しました。商品を販売せず、中立な立場から皆様の家計の改善、保険の見直し、資産運用をサポートいたします✨
+  </div>
+</div>`,
+        talk: "初めに、元銀行員で現在は独立系FPの萩原先生です。\n萩原先生は講座を立ち上げた段階からお世話になっている先生になりますね。"
+      },
+      {
+        page: "P.19",
+        title: "講師プロフィール：小山 晃広",
+        customHtml: `
+<div class="sv-wrap" style="background:#fff;min-height:360px;position:relative;overflow:hidden;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <!-- Geometric shapes (corners) -->
+  <div style="position:absolute;top:-20px;right:-20px;width:120px;height:120px;background:linear-gradient(135deg,#c8dce8,#e0ecf4);transform:rotate(15deg);opacity:0.5;border-radius:4px;"></div>
+  <div style="position:absolute;bottom:-20px;left:-20px;width:100px;height:100px;background:linear-gradient(135deg,#c8dce8,#e0ecf4);transform:rotate(30deg);opacity:0.4;border-radius:4px;"></div>
+  <!-- Content -->
+  <div style="position:relative;z-index:1;display:flex;gap:14px;padding:14px 16px;">
+    <!-- Left: Profile info -->
+    <div style="flex:1.4;">
+      <div style="display:inline-block;background:#2ab0b0;color:#fff;font-size:0.72em;font-weight:700;padding:3px 12px;border-radius:14px;margin-bottom:6px;">プロフィール</div>
+      <!-- Furigana + Name -->
+      <div style="font-size:0.72em;color:#555;letter-spacing:0.15em;margin-bottom:2px;">こやま　あきひろ</div>
+      <div style="font-size:1.7em;font-weight:700;color:#2ab0b0;letter-spacing:0.05em;margin-bottom:4px;">小山 晃広</div>
+      <div style="height:3px;background:linear-gradient(90deg,#2ab0b0,#a0d8d8);width:60%;margin-bottom:10px;border-radius:2px;"></div>
+      <!-- Basic info -->
+      <div style="font-size:0.76em;color:#333;line-height:1.9;">
+        <div>● 年齢：1987年生まれ／38歳</div>
+        <div>● 出身：群馬県</div>
+      </div>
+      <!-- Career -->
+      <div style="font-size:0.76em;color:#333;margin-top:8px;line-height:1.9;">
+        <div style="font-weight:700;margin-bottom:2px;">【経歴】</div>
+        <div>● 大手証券会社：10年<br>
+          <span style="padding-left:12px;font-size:0.95em;color:#555;">個人や法人の投資家に対しアドバイザリー業務に従事</span>
+        </div>
+        <div>● ファンドマネージャー（投資信託の運用）：3年<br>
+          <span style="padding-left:12px;font-size:0.95em;color:#555;">新しい投資信託の組成や既存ファンドの管理・運用を担当</span>
+        </div>
+      </div>
+      <!-- Bottom text -->
+      <div style="font-size:0.75em;color:#333;margin-top:10px;line-height:1.7;">
+        その後、自身でも資産運用を行いながら、いままでの経験を活かして講師として活動中。
+      </div>
+    </div>
+    <!-- Right: Photo placeholder -->
+    <div style="flex:0.8;display:flex;align-items:center;justify-content:center;">
+      <div style="width:140px;height:140px;border-radius:50%;border:3px solid #c4a050;background:linear-gradient(135deg,#e3f2fd,#b0c4d8);display:flex;align-items:center;justify-content:center;font-size:0.7em;color:#666;text-align:center;line-height:1.5;">
+        <div>小山<br>晃広先生</div>
+      </div>
+    </div>
+  </div>
+</div>`,
+        talk: "続きまして、元証券マンでファンドマネージャーをやられていた小山先生。"
+      },
+      {
+        page: "P.20",
+        title: "講師プロフィール：谷元 勝紀",
+        customHtml: `
+<div class="sv-wrap" style="background:#fff;min-height:360px;position:relative;overflow:hidden;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <div style="position:absolute;left:0;top:0;width:18%;height:60%;background-image:radial-gradient(circle,#f0a0a0 1.5px,transparent 1.5px);background-size:11px 11px;opacity:0.4;"></div>
+  <div style="position:absolute;right:0;bottom:0;width:18%;height:40%;background-image:radial-gradient(circle,#80c0d0 1.5px,transparent 1.5px);background-size:11px 11px;opacity:0.4;"></div>
+  <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:linear-gradient(135deg,#d0e8f0,#e8f4f8);transform:rotate(20deg);opacity:0.5;border-radius:4px;"></div>
+  <div style="position:relative;z-index:1;display:flex;gap:14px;padding:12px 16px;">
+    <div style="flex:1.4;">
+      <div style="display:inline-block;background:#2ab0b0;color:#fff;font-size:0.72em;font-weight:700;padding:3px 12px;border-radius:14px;margin-bottom:6px;">プロフィール</div>
+      <div style="font-size:0.7em;color:#888;letter-spacing:0.12em;margin-bottom:2px;">たにもと　かつき</div>
+      <div style="font-size:1.6em;font-weight:700;color:#333;letter-spacing:0.05em;margin-bottom:6px;">谷元　勝紀</div>
+      <div style="font-size:0.76em;color:#333;line-height:2;">
+        ・肩書き：投資講師／個人投資家<br>
+        ・投資歴：6年<br>
+        ・主なスタイル：中長期投資／投資信託／個別株／テーマ投資<br>
+        ・年間利回り80%超えなど、再現性を意識した投資スタイルが強み<br>
+        ・初心者〜中級者向けに、時代の流れを読み解きながら実践できる<br>
+        　投資法を伝える講師として活動中<br>
+        〜 資格：FP2級／講師実績あり 〜
+      </div>
+    </div>
+    <div style="flex:0.8;display:flex;align-items:center;justify-content:center;">
+      <div style="width:140px;height:140px;border-radius:50%;border:3px solid #c4a050;background:linear-gradient(135deg,#e8f0e8,#c8d8c8);display:flex;align-items:center;justify-content:center;font-size:0.7em;color:#666;text-align:center;line-height:1.5;">
+        <div>谷元<br>勝紀先生</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin:4px 14px 10px;background:#fce4ec;border-radius:10px;padding:10px 14px;font-size:0.72em;color:#333;line-height:1.7;border:1px solid #f8bbd0;">
+    6年間、資産運用に取り組み、初心者から中級者までの方を対象にサポートを行っています。『時代の流れを読み解く力』と『再現性のある戦略』を大切に、実践に落とし込める投資スタイルをお伝えしていきます。
+  </div>
+</div>`,
+        talk: "続きまして、個人投資家の谷本先生。"
+      },
+      {
+        page: "P.21",
+        title: "講師プロフィール：髙木 悦子",
+        customHtml: `
+<div class="sv-wrap" style="background:#f8f8f8;min-height:380px;position:relative;overflow:hidden;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <div style="position:absolute;left:0;top:0;width:16%;height:70%;background-image:radial-gradient(circle,#c0d8e8 1.5px,transparent 1.5px);background-size:11px 11px;opacity:0.5;"></div>
+  <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:linear-gradient(135deg,#d0e8f0,#e8f4f8);transform:rotate(20deg);opacity:0.4;border-radius:4px;"></div>
+  <div style="position:relative;z-index:1;display:flex;gap:12px;padding:12px 14px 6px;">
+    <div style="flex:1.5;">
+      <div style="display:inline-block;background:#2ab0b0;color:#fff;font-size:0.72em;font-weight:700;padding:3px 12px;border-radius:14px;margin-bottom:6px;">プロフィール</div>
+      <div style="font-size:0.68em;color:#888;letter-spacing:0.12em;margin-bottom:2px;">たかぎ　えつこ</div>
+      <div style="font-size:1.5em;font-weight:700;color:#333;letter-spacing:0.05em;margin-bottom:8px;">髙木　悦子</div>
+      <div style="font-size:0.71em;color:#333;line-height:1.9;">
+        ・投資歴20年超（個別株、投資信託、金、外貨預金、外貨建定期預金 など）<br>
+        ・教育に携わった後、会計・労務他分野に従事し、個人の保険相談やNISA等の相談などにも携わってきました。<br>
+        ・配当金と優待重視で長期保有、追加投資をしてきましたが、数年前から譲渡益も重視するスタンスに変更。<br>
+        ・iDeCo、新NISA、ふるさと納税などをフル活用しつつ、NISA以外でも個別株（日本）を中心に分散投資しています。<br>
+        ・学習講師の中でFP2・3級、簿記3級の試験解説作成や模試作成も行っています。<br>
+        ・会社員をしながら投資しており、数年前から給与所得よりも投資関連の所得が上回っています。<br>
+        〜 資格：１級FP技能士／日商簿記1級／教員免許状／税理士試験2科目合格 など 〜
+      </div>
+    </div>
+    <div style="flex:0.7;display:flex;align-items:center;justify-content:center;">
+      <div style="width:120px;height:120px;border-radius:50%;border:3px solid #c4a050;background:linear-gradient(135deg,#fce4ec,#e8f5e9,#e3f2fd);display:flex;align-items:center;justify-content:center;font-size:0.68em;color:#888;text-align:center;line-height:1.5;">
+        <div>髙木<br>悦子先生</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin:2px 12px 8px;background:#fce4ec;border-radius:10px;padding:8px 14px;font-size:0.72em;color:#333;line-height:1.7;border:1px solid #f8bbd0;text-align:center;">
+    お金の知識をわかりやすく伝えることを心がけています。<br>
+    皆様が将来投資の目標を達成できるように、一緒に学びながらサポートいたします。
+  </div>
+</div>`,
+        talk: "また、ベテラン投資家の髙木先生。\n高木先生は投資歴20年超えてらっしゃる先生で、お持ちの資格が凄くて教員免許・FP1級・簿記1級等もお持ちの方になります。"
+      },
+      {
+        page: "P.22",
+        title: "講師プロフィール：渡邊 裕樹",
+        customHtml: `
+<div class="sv-wrap" style="background:#fff;min-height:380px;position:relative;overflow:hidden;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <div style="position:absolute;left:0;top:0;width:14%;height:40%;background-image:radial-gradient(circle,#c0d8e8 1.5px,transparent 1.5px);background-size:11px 11px;opacity:0.4;"></div>
+  <div style="position:relative;z-index:1;display:flex;gap:12px;padding:12px 14px 6px;">
+    <div style="flex:1.5;">
+      <div style="display:inline-block;background:#2ab0b0;color:#fff;font-size:0.72em;font-weight:700;padding:3px 12px;border-radius:14px;margin-bottom:6px;">プロフィール</div>
+      <div style="font-size:1.1em;font-weight:400;color:#333;letter-spacing:0.1em;margin-bottom:2px;">わたなべ　ひろき</div>
+      <div style="font-size:0.72em;color:#888;margin-bottom:8px;">（渡邊 裕樹／1984年生まれ・41歳）</div>
+      <div style="font-size:0.75em;color:#333;line-height:2;">
+        ● 航空業界18年（2025年末に退職済み）→ 投資・講師活動へ<br>
+        ● 投資歴7年（米国指数・高配当株・個別株など）<br>
+        ● 国際NPO副代表（2022年〜）／2026年1月に法人設立<br>
+        ● 資産形成は「人生マラソン」。伴走型の支援が得意です<br>
+        ● 講演・セミナー講師としても活動中 ♪<br>
+        〜　保有資格：2級FP技能士／AFP／一種証券外務員／オンライン心理カウンセラー　〜
+      </div>
+    </div>
+    <div style="flex:0.7;display:flex;align-items:center;justify-content:center;">
+      <div style="width:130px;height:130px;border-radius:50%;border:3px solid #c4a050;background:linear-gradient(135deg,#e8eef8,#c8d4e8);display:flex;align-items:center;justify-content:center;font-size:0.68em;color:#666;text-align:center;line-height:1.5;">
+        <div>渡邊<br>裕樹先生</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin:2px 12px 8px;background:#fce4ec;border-radius:10px;padding:8px 14px;font-size:0.72em;color:#333;line-height:1.7;border:1px solid #f8bbd0;">
+    資産運用は人生マラソン。走り続けるための「体質」（知識・経験・資金力・メンタル）を整え、長期で資産を育てる伴走を大切にしています。一人ひとりのペースに合わせ、無理のない資産形成をサポートします。
+  </div>
+</div>`,
+        talk: "最後に、直近で受講者が非常に多くなってきたので新しく参画していただいた渡辺先生になります。\n\nこの5名のうち、1人が○○さんの専属講師になって頂き基本的には1年間ラインやZoomでセッションを受ける事ができるので心から安心して受講できるかと思います。\n\nここまでで、何かご質問はございますでしょうか？"
+      },
+      {
+        page: "P.23",
+        title: "資産運用動画マニュアル",
+        customHtml: `
+<div class="sv-wrap" style="background:linear-gradient(135deg,#f5efe0 0%,#ede3ce 50%,#e0d4b8 100%);min-height:380px;position:relative;overflow:hidden;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <!-- Dot pattern left -->
+  <div style="position:absolute;left:0;top:0;width:22%;height:100%;background-image:radial-gradient(circle,#c4a050 1.2px,transparent 1.2px);background-size:10px 10px;opacity:0.25;"></div>
+  <!-- Geometric lines top-right -->
+  <svg style="position:absolute;right:0;top:0;width:18%;height:40%;opacity:0.25;" viewBox="0 0 100 80">
+    <line x1="100" y1="0" x2="40" y2="60" stroke="#c4a050" stroke-width="1"/>
+    <line x1="100" y1="0" x2="70" y2="80" stroke="#c4a050" stroke-width="1"/>
+    <line x1="40" y1="60" x2="70" y2="80" stroke="#c4a050" stroke-width="0.7"/>
+  </svg>
+  <!-- Geometric lines bottom-left -->
+  <svg style="position:absolute;left:0;bottom:0;width:18%;height:30%;opacity:0.25;" viewBox="0 0 80 60">
+    <line x1="0" y1="60" x2="50" y2="10" stroke="#c4a050" stroke-width="1"/>
+    <line x1="0" y1="60" x2="70" y2="30" stroke="#c4a050" stroke-width="1"/>
+    <line x1="50" y1="10" x2="70" y2="30" stroke="#c4a050" stroke-width="0.7"/>
+  </svg>
+  <!-- Content -->
+  <div style="position:relative;z-index:1;padding:12px 14px 6px;">
+    <div style="display:flex;align-items:flex-start;gap:10px;">
+      <div style="flex:1.4;">
+        <div style="font-size:1.3em;font-weight:700;color:#1a2c5c;letter-spacing:0.03em;margin-bottom:10px;">資産運用動画マニュアル</div>
+        <!-- Two column checklist -->
+        <div style="display:flex;gap:20px;">
+          <div style="flex:1;font-size:0.76em;color:#222;line-height:2.1;">
+            □ 家計管理と貯蓄・投資<br>
+            □ 投資マインド<br>
+            □ 各種金融商品<br>
+            □ 株式・債券・ETF<br>
+            □ 外貨建て保険<br>
+            □ 金利と各金融商品<br>
+            □ 相場サイクル<br>
+            □ ファンダメンタルズ分析
+          </div>
+          <div style="flex:1;font-size:0.76em;color:#222;line-height:2.1;">
+            □ 雇用統計<br>
+            □ 消費者信頼感指数<br>
+            □ 製造業景気指数<br>
+            □ テクニカル分析<br>
+            □ トレーディングビュー操作方法<br>
+            □ ダウ理論<br>
+            □ トレンドライン<br>
+            □ その他
+          </div>
+        </div>
+      </div>
+      <!-- Right: screen graphic -->
+      <div style="flex:0.6;display:flex;align-items:center;justify-content:center;padding-top:10px;">
+        <div style="position:relative;width:110px;height:110px;">
+          <div style="position:absolute;top:0;right:0;width:80px;height:60px;background:#2d3a5c;border-radius:4px;border:1px solid #c4a050;transform:perspective(200px) rotateY(-10deg);display:flex;align-items:center;justify-content:center;">
+            <div style="width:20px;height:20px;border:2px solid #c4a050;border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:8px solid #c4a050;border-top:5px solid transparent;border-bottom:5px solid transparent;margin-left:2px;"></div></div>
+          </div>
+          <div style="position:absolute;top:30px;left:0;width:75px;height:55px;background:#3a4a6c;border-radius:4px;border:1px solid #c4a050;transform:perspective(200px) rotateY(-8deg);"></div>
+          <div style="position:absolute;top:60px;right:10px;width:70px;height:50px;background:#2a3a5c;border-radius:4px;border:1px solid #c4a050;transform:perspective(200px) rotateY(-10deg);"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Bottom bar -->
+    <div style="margin-top:10px;border-top:2px solid #c4a050;padding-top:8px;text-align:center;font-size:0.82em;font-weight:700;color:#1a2c5c;letter-spacing:0.03em;">
+      余計なノウハウは一切省いた実践特化の動画コンテンツ
+    </div>
+  </div>
+</div>`,
+        talk: "また、お忙しい方を想定した講座となっておりますので、普段は自己学習ができるように動画マニュアルも用意しておりますので時間・場所を問わず学習可能となっております。\n\n皆さんにも伝えているのですが・・・本当に色々な投資商品がありますが、この世にメリットしか無い商品は1つも無いですからね！笑\n私の中で、メリットしか無いと謳っている人は詐欺師だと思ってます。\n\nどんな商品でもメリットもあればデメリットもあるので、その両方を正しく理解した上で自身の年齢、資産状況を加味すると、どのような投資戦略を行うのがベストなのかを自分の力で判断できるようになる事が重要なので、その力を正しく身につけて行くための講座になります。\nそのため、40代〜50代の方の受講者様が圧倒的に多いですね！\n（お客様の年齢層に合わせる。自分と似たような年齢層が多い方が安心する。）"
+      },
+      {
+        page: "P.24",
+        title: "全12回カリキュラム＋α（講座例）",
+        customHtml: `
+<div class="sv-wrap" style="background:#fff;min-height:380px;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <div style="padding:12px 18px 6px;">
+    <div style="font-size:0.6em;font-weight:600;color:#c4a050;letter-spacing:0.2em;margin-bottom:4px;">CURRICULUM</div>
+    <div style="font-size:1.2em;font-weight:700;color:#1a2c5c;letter-spacing:0.02em;margin-bottom:12px;">全12回カリキュラム＋α（講座例）</div>
+    <!-- Two column checklist -->
+    <div style="display:flex;gap:20px;">
+      <!-- Left column -->
+      <div style="flex:1;">
+        <table style="width:100%;border-collapse:collapse;">
+          <tr style="height:30px;"><td style="width:16px;vertical-align:middle;"><div style="width:14px;height:14px;border:1.5px solid #c4a050;border-radius:2px;"></div></td><td style="width:50px;padding-left:6px;"><span style="font-size:0.72em;font-weight:700;color:#c4a050;">第1回</span></td><td style="font-size:0.72em;color:#222;">株式投資の全体像と心構え</td></tr>
+          <tr style="height:30px;"><td style="vertical-align:middle;"><div style="width:14px;height:14px;border:1.5px solid #c4a050;border-radius:2px;"></div></td><td style="padding-left:6px;"><span style="font-size:0.72em;font-weight:700;color:#c4a050;">第2回</span></td><td style="font-size:0.72em;color:#222;">株取引の仕組みと用語の基礎</td></tr>
+          <tr style="height:30px;"><td style="vertical-align:middle;"><div style="width:14px;height:14px;border:1.5px solid #c4a050;border-radius:2px;"></div></td><td style="padding-left:6px;"><span style="font-size:0.72em;font-weight:700;color:#c4a050;">第3回</span></td><td style="font-size:0.72em;color:#222;">チャートの基礎（全投資期間共通）</td></tr>
+          <tr style="height:30px;"><td style="vertical-align:middle;"><div style="width:14px;height:14px;border:1.5px solid #c4a050;border-radius:2px;"></div></td><td style="padding-left:6px;"><span style="font-size:0.72em;font-weight:700;color:#c4a050;">第4回</span></td><td style="font-size:0.72em;color:#222;">短期売買の考え方（デイトレ〜数日）</td></tr>
+          <tr style="height:30px;"><td style="vertical-align:middle;"><div style="width:14px;height:14px;border:1.5px solid #c4a050;border-radius:2px;"></div></td><td style="padding-left:6px;"><span style="font-size:0.72em;font-weight:700;color:#c4a050;">第5回</span></td><td style="font-size:0.72em;color:#222;">テクニカル分析①（基本指標）</td></tr>
+          <tr style="height:30px;"><td style="vertical-align:middle;"><div style="width:14px;height:14px;border:1.5px solid #c4a050;border-radius:2px;"></div></td><td style="padding-left:6px;"><span style="font-size:0.72em;font-weight:700;color:#c4a050;">第6回</span></td><td style="font-size:0.72em;color:#222;">テクニカル分析②（売買ポイント）</td></tr>
+        </table>
+      </div>
+      <!-- Right column -->
+      <div style="flex:1;">
+        <table style="width:100%;border-collapse:collapse;">
+          <tr style="height:30px;"><td style="width:16px;vertical-align:middle;"><div style="width:14px;height:14px;border:1.5px solid #c4a050;border-radius:2px;"></div></td><td style="width:54px;padding-left:6px;"><span style="font-size:0.72em;font-weight:700;color:#c4a050;">第7回</span></td><td style="font-size:0.72em;color:#222;">中期投資の考え方（数週間〜数か月）</td></tr>
+          <tr style="height:30px;"><td style="vertical-align:middle;"><div style="width:14px;height:14px;border:1.5px solid #c4a050;border-radius:2px;"></div></td><td style="padding-left:6px;"><span style="font-size:0.72em;font-weight:700;color:#c4a050;">第8回</span></td><td style="font-size:0.72em;color:#222;">ファンダメンタル分析①（基礎）</td></tr>
+          <tr style="height:30px;"><td style="vertical-align:middle;"><div style="width:14px;height:14px;border:1.5px solid #c4a050;border-radius:2px;"></div></td><td style="padding-left:6px;"><span style="font-size:0.72em;font-weight:700;color:#c4a050;">第9回</span></td><td style="font-size:0.72em;color:#222;">長期投資の考え方（年単位）</td></tr>
+          <tr style="height:30px;"><td style="vertical-align:middle;"><div style="width:14px;height:14px;border:1.5px solid #c4a050;border-radius:2px;"></div></td><td style="padding-left:6px;"><span style="font-size:0.72em;font-weight:700;color:#c4a050;">第10回</span></td><td style="font-size:0.72em;color:#222;">売買ルールの作り方</td></tr>
+          <tr style="height:30px;"><td style="vertical-align:middle;"><div style="width:14px;height:14px;border:1.5px solid #c4a050;border-radius:2px;"></div></td><td style="padding-left:6px;"><span style="font-size:0.72em;font-weight:700;color:#c4a050;">第11回</span></td><td style="font-size:0.72em;color:#222;">実践演習（銘柄分析）</td></tr>
+          <tr style="height:30px;"><td style="vertical-align:middle;"><div style="width:14px;height:14px;border:1.5px solid #c4a050;border-radius:2px;"></div></td><td style="padding-left:6px;"><span style="font-size:0.72em;font-weight:700;color:#c4a050;">第12回</span></td><td style="font-size:0.72em;color:#222;">振り返りと今後の学習設計</td></tr>
+        </table>
+      </div>
+    </div>
+    <!-- Bottom -->
+    <div style="margin-top:14px;text-align:center;border-top:2px solid #1a2c5c;padding-top:10px;">
+      <span style="font-size:0.9em;font-weight:700;color:#1a2c5c;letter-spacing:0.03em;">余計なノウハウは一切省いた実践特化の動画コンテンツ</span>
+    </div>
+  </div>
+</div>`,
+        talk: "Zoomセッションの内容は、主にこちらの内容となります！\n全12回のカリキュラム＋4回のバッファで合計16回になります。\n\n初めは、投資と投機の違いという基礎的な部分から学習をしていき、進めていくとファンダメンタルズ分析で投資家が絶対に見ている決算書の重要ポイント、そして最終的には銘柄を他人に説明できるレベルまでなった上で初めて100株単位で株を買ってみてくださいねとアドバイスしております。\n\n焦る必要は全く無いので、他の方と同様にまずは着実に知識を身につけて頂き徐々に自身の力で分析までできるようになる事が重要です。\n\nこれを、マンツーマンでやらせて頂いているので大変ご好評いただいております。"
+      },
+      {
+        page: "P.25",
+        title: "他社講座との比較（GFS）",
+        customHtml: `
+<div class="sv-wrap" style="background:#f5f0e8;min-height:380px;padding:0;font-family:'Noto Sans JP',sans-serif;">
+  <!-- GFS header bar -->
+  <div style="background:#1a3a7c;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:6px;">
+      <div style="background:#fff;color:#1a3a7c;font-size:0.75em;font-weight:700;padding:2px 6px;border-radius:3px;">GFS</div>
+    </div>
+    <div style="display:flex;gap:6px;">
+      <div style="background:#cc2200;color:#fff;font-size:0.62em;font-weight:700;padding:4px 8px;border-radius:3px;text-align:center;line-height:1.3;">無料体験講座は<br>こちら ›</div>
+      <div style="background:#1a56c4;color:#fff;font-size:0.62em;font-weight:700;padding:4px 8px;border-radius:3px;text-align:center;line-height:1.3;">無料体験講座<br>申込み確認 ›</div>
+    </div>
+  </div>
+  <!-- Nav bar -->
+  <div style="background:#fff;border-bottom:1px solid #ddd;padding:4px 14px;display:flex;gap:16px;font-size:0.62em;color:#333;">
+    <span>GFSについて</span><span>講師陣紹介</span><span>GFS生徒の声・評判・口コミ</span><span>動画一覧</span><span>入学案内</span>
+  </div>
+  <!-- Hero area -->
+  <div style="background:#f5e8c8;padding:14px 20px 10px;text-align:center;">
+    <div style="font-size:1.2em;font-weight:700;color:#1a2c5c;margin-bottom:4px;">投資初心者でも<br>学びやすい環境が整っています！</div>
+    <div style="font-size:0.68em;color:#555;line-height:1.7;margin-bottom:10px;">
+      スクール選びでお悩みの方に朗報です！比較表をご用意しました。<br>
+      それぞれのスクールの特徴を分かりやすくまとめています。
+    </div>
+    <!-- Table -->
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.65em;background:#fff;border:1px solid #ddd;">
+        <thead>
+          <tr style="background:#f0f0f0;color:#333;">
+            <th style="padding:5px;border:1px solid #ddd;">受講期間</th>
+            <th style="padding:5px;border:1px solid #ddd;">金額（税込）</th>
+            <th style="padding:5px;border:1px solid #ddd;">学べる講座</th>
+            <th style="padding:5px;border:1px solid #ddd;">支払い方法</th>
+            <th style="padding:5px;border:1px solid #ddd;">返金保証</th>
+            <th style="padding:5px;border:1px solid #ddd;">受講スタイル</th>
+            <th style="padding:5px;border:1px solid #ddd;">その他の特徴</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="background:#1a3a7c;padding:4px;text-align:center;vertical-align:middle;">
+              <div style="color:#fff;font-size:0.85em;font-weight:700;">GFS</div>
+              <div style="color:#ddd;font-size:0.75em;">6ヶ月間</div>
+            </td>
+            <td style="padding:5px;border:1px solid #ddd;text-align:center;font-weight:700;color:#cc2200;">合計 698,000円<br><span style="font-weight:400;font-size:0.85em;color:#555;">・入学金：55,000円<br>・学費：643,000円</span></td>
+            <td style="padding:5px;border:1px solid #ddd;font-size:0.85em;color:#333;">経済史/金融/保険<br>/投資信託/国内株式<br>/米国株式/FX<br>/債券/コモディティ<br>/NISA/iDeCo</td>
+            <td style="padding:5px;border:1px solid #ddd;font-size:0.85em;">クレジットカード（デビットカード）/銀行振込/教育ローン</td>
+            <td style="padding:5px;border:1px solid #ddd;text-align:center;">8日間</td>
+            <td style="padding:5px;border:1px solid #ddd;text-align:center;font-size:0.85em;">動画講義/<br>Live講義</td>
+            <td style="padding:5px;border:1px solid #ddd;font-size:0.82em;color:#333;">◎実績<br>生徒数、講義数、講師数でNo.1<br><br>◎サポート体制<br>専任コンサルタント（LINE、メール）/動画内にQ&A欄あり/無料質問し放題/生徒同士の交流掲示板、つぶやき機能/休学制度（最大1年間）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>`,
+        talk: "一方で、このような講座はお金がかかるのですが相場っていくらだと思いますか？\n\n例えば、最も受講者が多いのがGFSというミキティーが広告塔をしている有名な講座なのですが・・・こちらは受講者数が多すぎるのでマンツーマンではなく、あくまで自身で動画講義を見て進める形になるのですが、それでも半年間で約70万です。"
+      }
+      ,
+      {
+        page: "P.26",
+        title: "他社講座との比較（ABCash）",
+        customHtml: `<div class="sv-wrap" style="background:#f5f5f5;padding:0;font-family:'Helvetica Neue',sans-serif;min-height:320px;display:flex;flex-direction:column;">
+  <div style="background:#fff;padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #e0e0e0;">
+    <div style="display:flex;align-items:center;gap:6px;">
+      <div style="width:28px;height:28px;background:#2a9d8f;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+        <div style="color:#fff;font-size:14px;font-weight:bold;">✦</div>
+      </div>
+      <div>
+        <div style="font-size:8px;color:#888;">お金のトレーニング</div>
+        <div style="font-size:14px;font-weight:bold;color:#2a2a2a;letter-spacing:1px;">ABCash</div>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;flex:1;padding:16px;gap:16px;">
+    <div style="flex:1;display:flex;justify-content:center;align-items:flex-start;">
+      <div style="background:#fff;border-radius:12px;padding:18px;width:220px;box-shadow:0 2px 12px rgba(0,0,0,0.1);">
+        <div style="background:#2a9d8f;color:#fff;text-align:center;padding:8px;border-radius:6px;font-size:13px;font-weight:bold;margin-bottom:12px;">PLAN 3</div>
+        <div style="text-align:center;color:#555;font-size:10px;margin-bottom:4px;">投資もライフプランも、じっくりと</div>
+        <div style="text-align:center;font-size:15px;font-weight:bold;color:#2a2a2a;margin-bottom:14px;">プレミアムプラン</div>
+        <div style="background:#2a9d8f;color:#fff;text-align:center;padding:6px;border-radius:4px;font-size:10px;margin-bottom:10px;">料金（分割24回払い）</div>
+        <div style="text-align:center;margin-bottom:6px;">
+          <span style="background:#eee;color:#555;font-size:9px;padding:2px 6px;border-radius:3px;margin-right:4px;">月額</span>
+          <span style="font-size:22px;font-weight:bold;color:#2a2a2a;">59,905</span>
+          <span style="font-size:12px;color:#2a2a2a;">円〜</span>
+        </div>
+        <div style="text-align:center;font-size:9px;color:#777;margin-bottom:8px;">（一括払いの場合：税込1,437,700円）</div>
+        <div style="text-align:center;font-size:9px;color:#555;margin-bottom:14px;">内訳：入会金 55,000円 ＋ プラン料金</div>
+        <div style="background:#2a9d8f;color:#fff;text-align:center;padding:6px;border-radius:4px;font-size:10px;margin-bottom:8px;">サポート期間</div>
+        <div style="text-align:center;font-size:24px;font-weight:bold;color:#2a2a2a;">6<span style="font-size:12px;">ヶ月</span></div>
+      </div>
+    </div>
+    <div style="width:120px;display:flex;flex-direction:column;justify-content:center;gap:8px;">
+      <div style="font-size:11px;color:#2a9d8f;font-weight:bold;border-bottom:1px solid #2a9d8f;padding-bottom:4px;">Menu</div>
+      <div style="font-size:11px;color:#555;">トップ</div>
+      <div style="font-size:11px;color:#555;">エービーキャッシュとは</div>
+      <div style="font-size:11px;color:#555;">トレーニングについて</div>
+      <div style="font-size:11px;color:#555;">受講生の声</div>
+      <div style="font-size:11px;color:#2a9d8f;font-weight:bold;">• プラン・料金</div>
+      <div style="font-size:11px;color:#555;">よくあるご質問</div>
+    </div>
+  </div>
+  <div style="background:#fff8e1;border-top:2px solid #d4af37;padding:8px 16px;text-align:center;">
+    <span style="font-size:11px;color:#b8860b;font-weight:bold;">累計9万人以上受講　／　半年コース：約150万円</span>
+  </div>
+</div>`,
+        talk: "また、もう1社有名なのが厚切りジェイソンが広告塔をしているABキャッシュです。\nここも累計9万人以上の方が受講している講座ですが、同じ半年で約150万になります。\n\nこの金額だけ見れば、150万円も講座に払うなら投資に回したほうが良くないか？と普通思いますが、この金額を払ってまで受講する理由としては、やはり正しい知識を身につけた上で投資できるようになる事で生涯で数百万〜数千万変わってくる可能性が非常に高いからという事になります。\n\n大手さんが、半年で70万〜150万という相場になるのですが私達の講座はいくらだと思いますか？"
+      }
+      ,
+      {
+        page: "P.27",
+        title: "【サポート充実】スタンダードコース（1年）",
+        customHtml: `<div class="sv-wrap" style="background:linear-gradient(135deg,#fdf8ee 0%,#f5ead0 100%);padding:16px 20px;font-family:'Helvetica Neue',sans-serif;min-height:320px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><polygon points=\"100,0 100,100 0,0\" fill=\"%23d4af3722\"/></svg>') no-repeat;background-size:cover;"></div>
+  <h2 style="font-size:18px;font-weight:bold;color:#1a3a6b;margin:0 0 14px 0;letter-spacing:0.5px;">【サポート充実】スタンダードコース（1年）</h2>
+  <div style="display:flex;gap:20px;align-items:flex-start;">
+    <div style="flex:1;">
+      <div style="font-size:13px;font-weight:bold;color:#1a3a6b;margin-bottom:10px;">■ 講座カリキュラム</div>
+      <div style="display:flex;flex-direction:column;gap:7px;">
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#2a2a2a;"><span style="width:14px;height:14px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;"></span>・初回セッション</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#2a2a2a;"><span style="width:14px;height:14px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;"></span>・1年間の個別コンサル（最大16回）</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#2a2a2a;"><span style="width:14px;height:14px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;"></span>・各種動画（受講期間中は見放題）</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#2a2a2a;"><span style="width:14px;height:14px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;"></span>・LINEチャットサポート（48時間以内に返信）</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#2a2a2a;"><span style="width:14px;height:14px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;"></span>・リアルタイム勉強会（受講期間中は見放題）</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#2a2a2a;"><span style="width:14px;height:14px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;"></span>・家計管理表プレゼント</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#2a2a2a;"><span style="width:14px;height:14px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;"></span>・キャッシュフロー表プレゼント</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#2a2a2a;"><span style="width:14px;height:14px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;"></span>・資産一覧表プレゼント</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#2a2a2a;"><span style="width:14px;height:14px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;"></span>・各種表の管理方法もマンツーマンでサポート</div>
+      </div>
+    </div>
+    <div style="width:160px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+      <div style="background:#2a9d8f;color:#fff;border-radius:10px;padding:14px 18px;text-align:center;width:100%;box-sizing:border-box;">
+        <div style="font-size:12px;margin-bottom:4px;">分割24回</div>
+        <div style="font-size:22px;font-weight:bold;">約20,000円/月</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:26px;font-weight:bold;color:#1a3a6b;">49.8万円</div>
+        <div style="font-size:12px;color:#555;">（税込）</div>
+      </div>
+      <div style="width:100%;height:2px;background:linear-gradient(to right,#d4af37,#f5d87a,#d4af37);border-radius:2px;"></div>
+    </div>
+  </div>
+</div>`,
+        talk: "私達の講座はマンツーマンでのサポート付き、かつ1年間で49.8万円になります。\n他の方より、なぜ他社より金額が安いのか聞かれるのですが、私達は広告費がほぼかかっていないからです。\n\n講座を皆様のために提供する時には人件費と広告費が主な経費になりますが、あくまで私達の講座は動画を観てお越し頂いた方だけ案内しておりますので、広告費を大幅に削減する事が出来ております。\n\nそのため他社よりもクオリティ高く、かつ安価で提供しておりますので大変ご好評頂いております。\n\nここまでで、何かご質問やご不明点はございますでしょうか？"
+      }
+      ,
+      {
+        page: "P.28",
+        title: "Q＆A",
+        customHtml: `<div class="sv-wrap" style="background:linear-gradient(135deg,#fdf8ee 0%,#f5ead0 100%);display:flex;align-items:center;justify-content:center;min-height:320px;position:relative;overflow:hidden;font-family:Georgia,serif;">
+  <div style="position:absolute;top:0;left:0;width:80px;height:200px;background:radial-gradient(circle,#d4af3744 0%,transparent 70%);background-size:8px 8px;background-image:radial-gradient(circle,#d4af37 1px,transparent 1px);background-size:10px 10px;opacity:0.5;"></div>
+  <div style="position:absolute;bottom:0;right:0;width:80px;height:200px;background-image:radial-gradient(circle,#d4af37 1px,transparent 1px);background-size:10px 10px;opacity:0.5;"></div>
+  <div style="position:absolute;top:10px;right:10px;width:60px;height:60px;border-top:2px solid #d4af3766;border-right:2px solid #d4af3766;"></div>
+  <div style="position:absolute;bottom:10px;left:10px;width:60px;height:60px;border-bottom:2px solid #d4af3766;border-left:2px solid #d4af3766;"></div>
+  <div style="text-align:center;">
+    <div style="font-size:72px;font-weight:bold;color:#1a3a6b;letter-spacing:8px;line-height:1;margin-bottom:16px;">Q <span style="font-size:48px;">&</span> A</div>
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;">
+      <div style="height:1px;width:80px;background:linear-gradient(to right,transparent,#b8a060);"></div>
+      <div style="color:#d4af37;font-size:18px;">❧</div>
+      <div style="height:1px;width:80px;background:linear-gradient(to left,transparent,#b8a060);"></div>
+    </div>
+  </div>
+</div>`,
+        talk: "カリキュラムに関して、何かご不明点があればおっしゃってくださいませ！"
+      }
+      ,
+      {
+        page: "P.29",
+        title: "【手軽に学べる】ショットコース（6カ月）",
+        customHtml: `<div class="sv-wrap" style="background:linear-gradient(135deg,#fdf8ee 0%,#f5ead0 100%);padding:16px 20px;font-family:'Helvetica Neue',sans-serif;min-height:320px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:0;right:0;width:100px;height:100px;border-top:2px solid #d4af3755;border-right:2px solid #d4af3755;"></div>
+  <div style="position:absolute;bottom:0;left:0;width:100px;height:100px;border-bottom:2px solid #d4af3755;border-left:2px solid #d4af3755;"></div>
+  <div style="position:absolute;top:0;left:0;width:70px;height:180px;background-image:radial-gradient(circle,#d4af37 1px,transparent 1px);background-size:8px 8px;opacity:0.3;"></div>
+  <div style="position:absolute;top:8px;right:30px;width:0;height:0;border-left:30px solid transparent;border-right:30px solid transparent;border-top:52px solid #d4af3722;"></div>
+  <div style="background:#e8f9ed00;margin-bottom:2px;">
+    <div style="display:inline-block;background:#fff3;border:1px solid #d4af3766;padding:2px 8px;border-radius:3px;margin-bottom:4px;">
+      <span style="font-size:10px;color:#b8860b;font-weight:bold;">※金額ネックの方のみ提案</span>
+    </div>
+  </div>
+  <h2 style="font-size:17px;font-weight:bold;color:#1a3a6b;margin:0 0 12px 0;">【手軽に学べる】ショットコース（6カ月）</h2>
+  <div style="display:flex;gap:20px;align-items:flex-start;">
+    <div style="flex:1;">
+      <div style="font-size:12px;font-weight:bold;color:#1a3a6b;margin-bottom:8px;">■ 講座カリキュラム</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;align-items:flex-start;gap:8px;font-size:11px;color:#2a2a2a;"><span style="width:13px;height:13px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;margin-top:1px;"></span><span>・個別セッション4回<br><span style="color:#666;">　（初回セッション含む）</span></span></div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#2a2a2a;"><span style="width:13px;height:13px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;"></span>・各種動画（受講期間中は見放題）</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#2a2a2a;"><span style="width:13px;height:13px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;"></span>・LINEチャットサポート（48時間以内に返信）</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#2a2a2a;"><span style="width:13px;height:13px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;"></span>・リアルタイム勉強会（受講期間中は見放題）</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#2a2a2a;"><span style="width:13px;height:13px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;"></span>・家計管理表プレゼント</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#2a2a2a;"><span style="width:13px;height:13px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;"></span>・キャッシュフロー表プレゼント</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#2a2a2a;"><span style="width:13px;height:13px;border:2px solid #d4af37;display:inline-block;flex-shrink:0;"></span>・資産一覧表プレゼント</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#2a2a2a;"><span style="width:13px;height:13px;background:#d4af37;display:inline-block;flex-shrink:0;"></span>・各種表の管理方法もマンツーマンでサポート</div>
+      </div>
+    </div>
+    <div style="width:155px;display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <div style="background:#2a9d8f;color:#fff;border-radius:10px;padding:12px 16px;text-align:center;width:100%;box-sizing:border-box;">
+        <div style="font-size:11px;margin-bottom:3px;">分割24回</div>
+        <div style="font-size:21px;font-weight:bold;">約8,400円/月</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:28px;font-weight:bold;color:#1a3a6b;">20万円</div>
+        <div style="font-size:11px;color:#555;">（税込）</div>
+      </div>
+      <div style="width:100%;height:2px;background:linear-gradient(to right,#d4af37,#f5d87a,#d4af37);border-radius:2px;"></div>
+    </div>
+  </div>
+</div>`,
+        talk: "また、金額面だけ迷っている方も多かったので、低価格で試しにやってみたいという方にはショットコースを提案させて頂いております。\n\nこちらは、半年間という期間にはなりますがLINEサポートや個別セッションも4回付きますのでサポート内容自体は勿論充実してますのでご安心くださいませ。"
+      }
+    ]
+  },
+
+  
+  /* ===== ④ プレゼン ===== */
+  pillar4: {
+  },
+
+  
+  /* ===== ⑤ クロージング ===== */
+  pillar5: {
+  }
+};
+
+/* ========== MODAL RENDERING ========== */
+function renderPillarModal(pillarNum) {
+  const mClass = { 1: "m1", 2: "m2", 3: "m3", 4: "m4", 5: "m5" }[pillarNum];
+  const titles = { 1: "① 世間話", 2: "② 問題提起", 3: "③ 危機感の醸成", 4: "④ プレゼン", 5: "⑤ クロージング" };
+  const icons = { 1: "☕", 2: "📊", 3: "⚡", 4: "🎯", 5: "🔒" };
+  const pillar = SCHOOL['pillar' + pillarNum];
+
+  let html = `<div class="modal ${mClass}">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <span class="head-badge">${icons[pillarNum]}</span>
+      <h2>${titles[pillarNum]}</h2>
+    </div>
+    <div class="modal-body">`;
+
+  // 目的
+  if (pillar.purpose) {
+    html += `<div class="section">
+      <div class="section-title"><span>🎯</span>目的</div>
+      <div class="purpose-box">${pillar.purpose}</div>
+    </div>`;
+  }
+
+  // スライド
+  if (pillar.slides) {
+    html += `<div class="section"><div class="section-title"><span>🖼️</span>プレゼン資料（タップで展開）</div>`;
+    pillar.slides.forEach((s, i) => {
+      const inner = s.customHtml ? s.customHtml : `<div style="padding:20px;text-align:center;">${s.slideText || ''}</div>`;
+      const talkHtml = s.talk.split('\n').map(p => p.trim()).filter(p => p).join('<br><br>');
+      html += `<div class="slide-card" id="slide-${pillarNum}-${i}">
+        <div class="slide-header" onclick="toggleSlide('slide-${pillarNum}-${i}')">
+          <span class="slide-page">${s.page}</span>
+          <span class="slide-title-text">${s.title}</span>
+          <span class="slide-toggle">▼</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-image">${inner}</div>
+          <div class="slide-talk">${talkHtml}</div>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  // 絶対に使って欲しいトーク
+  if (pillar.mustUseTalks) {
+    html += `<div class="section"><div class="section-title"><span>💬</span>絶対に使って欲しいトーク</div><div class="musttalk-list">`;
+    pillar.mustUseTalks.forEach(t => {
+      html += `<div class="musttalk-card">
+        <span class="mt-quote">「${t.text}」</span>
+        <span class="mt-intent"><span class="mt-intent-label">意図 →</span>${t.intent}</span>
+      </div>`;
+    });
+    html += `</div>`;
+    if (pillar.tip) {
+      html += `<div class="tip-box"><span class="tip-label">💡 ポイント</span>${pillar.tip}</div>`;
+    }
+    html += `</div>`;
+  }
+
+  // NG → OK トーク
+  if (pillar.ngok) {
+    html += `<div class="section"><div class="section-title"><span>⚖️</span>NG → OK トーク</div>`;
+    pillar.ngok.forEach(n => {
+      html += `<div class="ngok-row">
+        <div class="situation">📌 ${n.sit}</div>
+        <div class="ngok-card bad"><span class="tag-bad">❌ NG</span>${n.ng}</div>
+        <div class="ngok-card good"><span class="tag-good">⭕ OK</span>${n.ok}</div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  // プレゼン：反論・数字
+  if (pillarNum === 4) {
+    if (pillar.objections) {
+      html += `<div class="section"><div class="section-title"><span>🛡️</span>よくある反論・質問への切り返し</div>`;
+      pillar.objections.forEach(o => {
+        html += `<div class="objection-card"><div class="obj-q">${o.q}</div><div class="obj-a">${o.a}</div></div>`;
+      });
+      html += `</div>`;
+    }
+    if (pillar.numbers) {
+      html += `<div class="section"><div class="section-title"><span>📊</span>スクールの重要数字</div><div class="number-grid">`;
+      pillar.numbers.forEach(n => {
+        html += `<div class="number-card"><div class="number-label">${n.label}</div><div class="number-big">${n.big}</div><div class="number-note">${n.note}</div></div>`;
+      });
+      html += `</div></div>`;
+    }
+  }
+
+  // クロージング：断り文句
+  if (pillarNum === 5 && pillar.objections) {
+    html += `<div class="section"><div class="section-title"><span>🛡️</span>断り文句に対する解答例</div>`;
+    pillar.objections.forEach(o => {
+      const aHtml = o.a.split('\n').map(p => p.trim()).filter(p => p).join('<br><br>');
+      html += `<div class="objection-card"><div class="obj-q">${o.q}</div><div class="obj-a">${aHtml}</div></div>`;
+    });
+    html += `</div>`;
+  }
+
+  html += `</div></div>`;
+  return html;
+}
+
+function openModal(pillarKey) {
+  const num = parseInt(pillarKey.replace('pillar', ''));
+  document.getElementById('modalContent').innerHTML = renderPillarModal(num);
+  document.getElementById('modalContainer').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalContainer').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function closeIfBackdrop(e) {
+  if (e.target === document.getElementById('modalContainer')) closeModal();
+}
+
+function toggleSlide(slideId) {
+  const card = document.getElementById(slideId);
+  if (card) card.classList.toggle('open');
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

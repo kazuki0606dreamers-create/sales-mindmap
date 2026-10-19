@@ -325,7 +325,6 @@
 
 /* ===== 解説動画ライブラリ ===== */
 .video-library {
-  max-width: 1180px;
   margin: 0 auto 40px;
   padding: 0 20px;
 }
@@ -347,7 +346,7 @@
 }
 .vl-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   gap: 10px;
 }
 .vl-card {
